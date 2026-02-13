@@ -6,6 +6,7 @@
     <title>LibidoHub - 互联网首选力比多释放中心</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body { background-color: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
         a { text-decoration: none; color: inherit; }
 
@@ -103,10 +104,10 @@
     
     <div class="sidebar-section">
         <div class="sidebar-section-title">🔥 热门专区</div>
-        <a href="freud.html" class="sidebar-link">📚 弗洛伊德专区</a>
-        <a href="valentine.html" class="sidebar-link">💕 情人节特辑</a>
-        <a href="incest.html" class="sidebar-link">⚠️ 乱伦专区 (设置违规)</a>
-        <a href="sm.html" class="sidebar-link">⛓️ SM专区 (比昂/容器)</a>
+        <a href="#freud" class="sidebar-link" onclick="closeSidebar()">📚 弗洛伊德专区</a>
+        <a href="#valentine" class="sidebar-link" onclick="closeSidebar()">💕 情人节特辑</a>
+        <a href="#incest" class="sidebar-link" onclick="closeSidebar()">⚠️ 乱伦专区 (设置违规)</a>
+        <a href="#trending" class="sidebar-link" onclick="closeSidebar()">🔥 最热案例</a>
     </div>
 
     <div class="sidebar-section">
@@ -175,12 +176,10 @@
 <!-- ==================== 次级导航 ==================== -->
 <nav class="sub-nav">
     <a href="index.html" class="active">首页</a>
-    <a href="freud.html">弗洛伊德专区</a>
-    <a href="valentine.html">💕 情人节特辑</a>
-    <a href="analysts.html">分析师</a>
-    <a href="schools.html">学派</a>
-    <a href="incest.html">⚠️ 乱伦/设置违规</a>
-    <a href="upload.html">上传案例</a>
+    <a href="#freud">弗洛伊德专区</a>
+    <a href="#valentine">💕 情人节特辑</a>
+    <a href="#trending">🔥 最热案例</a>
+    <a href="#incest">⚠️ 乱伦/设置违规</a>
 </nav>
 
 <main class="container">
@@ -200,9 +199,9 @@
     </div>
 
     <!-- ==================== 情人节专区 ==================== -->
-    <div class="section-header">
+    <div class="section-header" id="valentine">
         <h2 class="section-title"><span class="emoji">💕</span>情人节专区 - 爱与移情</h2>
-        <a href="valentine.html" class="see-all">查看全部 ></a>
+        <a href="#valentine" class="see-all">查看全部 ></a>
     </div>
 
     <div class="video-grid">
@@ -275,9 +274,9 @@
     </div>
 
     <!-- ==================== 最热精神分析案例 ==================== -->
-    <div class="section-header">
+    <div class="section-header" id="trending">
         <h2 class="section-title"><span class="emoji">🔥</span>最热精神分析案例</h2>
-        <a href="trending.html" class="see-all">查看全部 ></a>
+        <a href="#trending" class="see-all">查看全部 ></a>
     </div>
 
     <div class="video-grid">
@@ -423,9 +422,9 @@
     </div>
 
     <!-- ==================== 弗洛伊德专区预览 ==================== -->
-    <div class="section-header">
+    <div class="section-header" id="freud">
         <h2 class="section-title"><span class="emoji">📚</span>弗洛伊德专区</h2>
-        <a href="freud.html" class="see-all">进入专区 ></a>
+        <a href="#freud" class="see-all">进入专区 ></a>
     </div>
 
     <div class="video-grid">
@@ -504,9 +503,9 @@
     </div>
 
     <!-- ==================== 乱伦/设置违规专区预览 ==================== -->
-    <div class="section-header">
+    <div class="section-header" id="incest">
         <h2 class="section-title"><span class="emoji">⚠️</span>乱伦专区 - 破坏设置的历史</h2>
-        <a href="incest.html" class="see-all">查看全部 ></a>
+        <a href="#incest" class="see-all">查看全部 ></a>
     </div>
 
     <div class="video-grid">
