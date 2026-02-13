@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sub在我怀里哭怎么办？50分钟完整记录 by 温尼科特 - LibidoHub</title>
+    <style>
+        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; }
+        a { text-decoration: none; color: inherit; }
+        
+        header { background-color: #1b1b1b; padding: 15px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: bold; }
+        .logo span { background: #ff9900; color: #000; padding: 2px 5px; border-radius: 3px; }
+
+        .main-container { display: flex; max-width: 1400px; margin: 20px auto; gap: 20px; padding: 0 15px; }
+        .content-area { flex: 3; }
+        .sidebar { flex: 1; }
+
+        .text-player-wrapper {
+            background-color: #000;
+            border: 1px solid #333;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .text-screen {
+            height: 550px;
+            background-color: #f8f6f0;
+            padding: 50px 60px;
+            overflow-y: scroll;
+            color: #222;
+            font-family: 'Times New Roman', 'Georgia', serif;
+            line-height: 1.9;
+            font-size: 16px;
+            border-bottom: 3px solid #ff9900;
+        }
+
+        .paper-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .paper-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .paper-source {
+            font-style: italic;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .paper-author {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .paper-publication {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 35px 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .text-screen p {
+            margin-bottom: 18px;
+            text-align: justify;
+            text-indent: 2em;
+        }
+
+        .text-screen p.no-indent {
+            text-indent: 0;
+        }
+
+        .dependency-level {
+            margin: 20px 0 20px 20px;
+            padding: 15px 20px;
+            background: #f0ede5;
+            border-left: 4px solid #666;
+        }
+
+        .dependency-level strong {
+            color: #333;
+        }
+
+        .dependency-level em {
+            font-style: italic;
+            color: #555;
+        }
+
+        .footnote {
+            font-size: 13px;
+            color: #666;
+            margin: 25px 0;
+            padding: 15px 20px;
+            background: #f0ede5;
+            border-left: 3px solid #999;
+        }
+
+        .footnote-number {
+            font-size: 11px;
+            vertical-align: super;
+            color: #ff6600;
+        }
+
+        .sexy-annotation {
+            background: #fff3cd;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-left: 4px solid #ff9900;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #856404;
+        }
+
+        .sexy-annotation::before {
+            content: "📌 LibidoHub 编者注：";
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #ff6600;
+        }
+
+        .warning-box {
+            background: #ffe6e6;
+            border: 1px solid #cc0000;
+            padding: 15px 20px;
+            margin: 25px 0;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #990000;
+        }
+
+        /* 进度条 */
+        .progress-bar-container {
+            background: #333;
+            height: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .progress-bar {
+            background: #ff9900;
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* 控制栏 */
+        .player-controls {
+            padding: 10px 15px;
+            background: #1b1b1b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .control-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 20px; margin-right: 15px; }
+        .control-btn:hover { color: #ff9900; }
+
+        .video-title { font-size: 22px; margin: 15px 0 10px 0; color: #fff; line-height: 1.4; }
+        .video-stats { color: #888; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        
+        .action-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .action-btn { background: #333; color: #fff; border: none; padding: 8px 15px; cursor: pointer; font-size: 13px; }
+        .action-btn:hover { background: #444; }
+        .action-btn.liked { background: #ff9900; color: #000; }
+
+        .tags { margin: 15px 0; }
+        .tag { background:#222; padding:5px 10px; border-radius:10px; color:#888; font-size:12px; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+        .tag:hover { color: #ff9900; }
+
+        /* 评论区 */
+        .comment-section { margin-top: 30px; }
+        .comment { display: flex; gap: 15px; margin-bottom: 20px; }
+        .avatar { width: 40px; height: 40px; background: #ff9900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; flex-shrink: 0; font-size: 18px; }
+        .comment-body h4 { margin: 0 0 5px 0; color: #ff9900; font-size: 14px; }
+        .comment-body h4 span { color: #555; font-size: 11px; font-weight: normal; }
+        .comment-body p { margin: 0; color: #ccc; font-size: 14px; line-height: 1.5; }
+
+        /* 侧边栏 */
+        .sidebar-item { display: flex; gap: 10px; cursor: pointer; margin-bottom: 15px; text-decoration: none; }
+        .sidebar-thumb { width: 160px; height: 90px; background: #333; display: flex; align-items: center; justify-content: center; color: #555; font-size: 11px; text-align: center; flex-shrink: 0; border-radius: 3px; }
+        .sidebar-info { flex: 1; }
+        .sidebar-title { font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #fff; line-height: 1.3; }
+        .sidebar-meta { font-size: 11px; color: #777; }
+        .sidebar-item:hover .sidebar-title { color: #ff9900; }
+
+        .ad-box { background:#222; padding:20px; text-align:center; border:1px dashed #444; color:#ff9900; margin-top: 15px; border-radius: 5px; }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e8e4dc; }
+        ::-webkit-scrollbar-thumb { background: #999; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff9900; }
+
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; }
+            .sidebar { order: 2; }
+            .text-screen { height: 450px; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Libido<span>Hub</span></a>
+    <div style="margin-left:auto; color:#888;">🤗 温尼科特专区 · Aftercare</div>
+</header>
+
+<div class="main-container">
+    <div class="content-area">
+        
+        <div class="text-player-wrapper">
+            <div class="text-screen" id="scrollingText">
+
+                <div class="paper-header">
+                    <div class="paper-title">Dependence<br>依赖</div>
+                    <div class="paper-author">D. W. Winnicott</div>
+                    <div class="paper-source">From "The Theory of the Parent-Infant Relationship"</div>
+                    <div class="paper-publication">International Journal of Psycho-Analysis, 1960</div>
+                </div>
+
+                <p>In the holding phase the infant is maximally dependent.</p>
+
+                <p class="no-indent" style="text-align:center; color:#666; font-size:14px; margin:20px 0;">在抱持阶段，婴儿处于最大程度的依赖中。</p>
+
+                <div class="sexy-annotation">
+                    所以aftercare的本质是什么？是让对方暂时回到婴儿状态——完全依赖你，完全信任你，而你要做的就是接住ta。这不是软弱，这是亲密关系中最深的信任。
+                </div>
+
+                <p>One can classify dependence thus:</p>
+
+                <div class="section-title">i. Absolute Dependence 绝对依赖</div>
+
+                <div class="dependency-level">
+                    <p class="no-indent">In this state the infant has no means of knowing about the maternal care, which is largely a matter of <em>prophylaxis</em>. He cannot gain control over what is well and what is badly done, but is only in a position to <strong>gain profit or to suffer disturbance</strong>.</p>
+                    <p class="no-indent" style="margin-top:15px; color:#666; font-size:14px;">在这种状态下，婴儿无从知晓母亲的照料，而这种照料主要是一种预防性的。他无法控制什么是好的、什么是坏的，只能要么<strong>获益</strong>，要么<strong>受到干扰</strong>。</p>
+                </div>
+
+                <div class="sexy-annotation">
+                    "只能获益或受到干扰"——在绝对依赖状态下，对方完全交出了控制权。这时候你做什么，ta都无法评估，只能全然信任你。这是sub drop之后最脆弱的时刻。你要做的不是"做什么"，而是"不做错什么"。
+                </div>
+
+                <div class="section-title">ii. Relative Dependence 相对依赖</div>
+
+                <div class="dependency-level">
+                    <p class="no-indent">Here the infant can become aware of the need for the details of maternal care, and can to a growing extent relate them to personal impulse, and then later, in a psycho-analytic treatment, can reproduce them in the <em>transference</em>.</p>
+                    <p class="no-indent" style="margin-top:15px; color:#666; font-size:14px;">在这里，婴儿开始能够意识到母亲照料的细节的必要性，并能逐渐将其与个人冲动联系起来，然后在精神分析治疗中，能够在<em>移情</em>中再现它们。</p>
+                </div>
+
+                <div class="sexy-annotation">
+                    开始恢复了。ta能感知到你在照顾ta，能分辨哪些是好的哪些不够。这时候可以开始轻声说话，问ta需要什么。
+                </div>
+
+                <div class="footnote">
+                    <span class="footnote-number">9</span> For an earlier statement by me on this issue see (13).<br>
+                    <span class="footnote-number">10</span> Here the work on primitive fantasy, with whose richness and complexity we are familiar through the teachings of <strong>Melanie Klein</strong>, becomes applicable and appropriate.
+                </div>
+
+                <div class="section-title">iii. Towards Independence 走向独立</div>
+
+                <div class="dependency-level">
+                    <p class="no-indent">The infant develops means for doing without actual care. This is accomplished through the <strong>accumulation of memories of care</strong>, the <strong>projection of personal needs</strong> and the <strong>introjection of care details</strong>, with the development of confidence in the environment.</p>
+                    <p class="no-indent" style="margin-top:15px; color:#666; font-size:14px;">婴儿发展出不需要实际照料的手段。这是通过<strong>照料记忆的积累</strong>、<strong>个人需求的投射</strong>和<strong>照料细节的内摄</strong>，以及对环境信任的发展来实现的。</p>
+                </div>
+
+                <p>Here must be added the element of intellectual understanding with its tremendous implications.</p>
+
+                <div class="sexy-annotation">
+                    这就是最终目标：ta把你的照料<strong>内化</strong>了。下次ta可以自己照顾自己了——不是因为不需要你了，而是因为你的抱持已经成为ta内心的一部分。<br><br>
+                    好的aftercare不是让人依赖你，而是让人最终能够<strong>独立</strong>。<br><br>
+                    好的治疗也是如此。
+                </div>
+
+                <div class="warning-box">
+                    WARNING! This text is printed for the personal use of the subscriber to PEP Web and is copyright to the Journal in which it originally appeared. It is illegal to copy, distribute or circulate it in any form whatsoever.
+                </div>
+
+                <p style="text-align:center; margin-top:40px; color:#888; font-size:14px;">
+                    [ 原文继续... ]<br><br>
+                    <span style="color:#ff9900;">所以，下次ta在你怀里哭的时候——<br>不要问为什么。不要分析。不要进去。<br>只是抱着。<br>直到ta准备好走向独立。</span>
+                </p>
+
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="readingProgress"></div>
+            </div>
+
+            <div class="player-controls">
+                <div>
+                    <button class="control-btn" title="Play">▶</button>
+                    <button class="control-btn" title="Volume">🔊</button>
+                    <span style="color:#888; font-size:12px;">Winnicott 1960 / Holding Environment</span>
+                </div>
+                <div>
+                    <button class="control-btn" title="Full Screen">⛶</button>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="video-title">sub在我怀里哭怎么办？50分钟完整记录 by 温尼科特</h1>
+        
+        <div class="video-stats">
+            <span>520万次观看 · 温尼科特专区 · Aftercare教程</span>
+            
+            <div class="action-buttons">
+                <button class="action-btn liked">👍 升华 114,514</button>
+                <button class="action-btn">👎 压抑 1,919</button>
+                <button class="action-btn">💾 内摄</button>
+                <button class="action-btn">📤 投射</button>
+                <button class="action-btn">🚨 弑父</button>
+            </div>
+        </div>
+
+        <div class="tags">
+            <span class="tag">#温尼科特</span>
+            <span class="tag">#holding</span>
+            <span class="tag">#aftercare</span>
+            <span class="tag">#依赖</span>
+            <span class="tag">#绝对依赖</span>
+            <span class="tag">#sub drop</span>
+            <span class="tag">#抱持</span>
+            <span class="tag">#不进去</span>
+            <span class="tag">#50分钟</span>
+        </div>
+
+        <div class="comment-section">
+            <h3 style="margin-bottom:20px;">评论 (6,847)</h3>
+            
+            <div class="comment">
+                <div class="avatar">🎸</div>
+                <div class="comment-body">
+                    <h4>Carl_Rogers_Official ✓ <span>置顶</span></h4>
+                    <p>所以我就说！治疗只需要三个要素：真诚、共情、无条件积极关注！你们精神分析搞那么复杂干嘛！抱着就完了！温尼科特懂！</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">📊</div>
+                <div class="comment-body">
+                    <h4>CBT_Therapist <span>3小时前</span></h4>
+                    <p>但是...你们不做认知重构吗？不挑战非理性信念吗？光抱着能解决什么问题？</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">🤗</div>
+                <div class="comment-body">
+                    <h4>Winnicott_Fan <span>回复 @CBT_Therapist</span></h4>
+                    <p>有时候问题不需要被"解决"，只需要被"承受"。你们CBT就知道做作业。</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">⛓️</div>
+                <div class="comment-body">
+                    <h4>BDSM_Educator <span>5小时前</span></h4>
+                    <p>等等这是正经心理学论文？？我以为是圈内教程...但确实写得比我们的指南还专业</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">🧠</div>
+                <div class="comment-body">
+                    <h4>Freud_Ghost <span>1天前</span></h4>
+                    <p>你们不分析一下为什么ta在哭吗？童年发生了什么？和父亲的关系怎么样？</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">📦</div>
+                <div class="comment-body">
+                    <h4>Bion_Container <span>回复 @Freud_Ghost</span></h4>
+                    <p>有时候不需要分析，只需要容纳。温尼科特和我在这点上是一致的。</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">😭</div>
+                <div class="comment-body">
+                    <h4>Needs_Aftercare <span>2天前</span></h4>
+                    <p>"好的aftercare不是让人依赖你，而是让人最终能够独立"——这句话让我哭了。我之前的dom不懂这个。</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">🛋️</div>
+                <div class="comment-body">
+                    <h4>Therapist_IRL <span>3天前</span></h4>
+                    <p>我把这篇发给我的来访看了。她说"原来你每次session结束前的五分钟是在做这个"。是的。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h4 style="margin-bottom:15px; color:#888;">🤗 温尼科特专区</h4>
+        
+        <a href="transitional-object.html" class="sidebar-item">
+            <div class="sidebar-thumb">🧸💤<br>TEDDY</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">小玩具每晚让我入睡：过渡性客体</div>
+                <div class="sidebar-meta">Winnicott · 340万观看</div>
+            </div>
+        </a>
+
+        <a href="story-of-o.html" class="sidebar-item">
+            <div class="sidebar-thumb">📦⛓️<br>CONTAIN</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">O的故事：容器功能训练全记录</div>
+                <div class="sidebar-meta">Wilfred_B · 780万观看</div>
+            </div>
+        </a>
+
+        <a href="transference-love.html" class="sidebar-item">
+            <div class="sidebar-thumb">💘🛋️<br>LOVE?</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">我爱上了我的分析师——移情还是真爱？</div>
+                <div class="sidebar-meta">Transference · 890万观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="sidebar-item">
+            <div class="sidebar-thumb">👩‍👦💯<br>ENOUGH</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">足够好的母亲：为什么完美是一种暴力</div>
+                <div class="sidebar-meta">Good_Enough · 430万观看</div>
+            </div>
+        </a>
+
+        <a href="sabina.html" class="sidebar-item">
+            <div class="sidebar-thumb">📝💋<br>SABINA</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">萨宾娜对我来说是个来访...</div>
+                <div class="sidebar-meta">Carl_Jung · 450万观看</div>
+            </div>
+        </a>
+
+        <div class="ad-box">
+            <b>⛓️ 需要专业aftercare？</b><br>
+            <small>温尼科特认证抱持环境</small><br>
+            <button style="background:#ff9900; border:none; padding:8px 15px; margin-top:10px; cursor:pointer; font-weight:bold;">🤗 获得抱持</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const textScreen = document.getElementById('scrollingText');
+    const progressBar = document.getElementById('readingProgress');
+
+    textScreen.addEventListener('scroll', () => {
+        const scrollTop = textScreen.scrollTop;
+        const scrollHeight = textScreen.scrollHeight - textScreen.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = scrolled + "%";
+    });
+</script>
+
+</body>
+</html>

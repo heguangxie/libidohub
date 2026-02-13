@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我爱上了我的分析师——这是移情还是真爱？ - LibidoHub</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+        a { text-decoration: none; color: inherit; }
+
+        header { background-color: #1b1b1b; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .logo-container { font-size: 28px; font-weight: bold; letter-spacing: -1px; cursor: pointer; }
+        .logo-text { color: #fff; }
+        .logo-box { background-color: #ff9900; color: #000; padding: 2px 8px; border-radius: 4px; margin-left: 2px; }
+
+        .search-bar { flex-grow: 1; display: flex; max-width: 600px; margin: 0 20px; }
+        .search-input { width: 100%; padding: 10px; background-color: #000; border: 1px solid #333; color: #999; font-size: 16px; }
+        .search-btn { background-color: #ff9900; border: none; padding: 0 20px; color: #000; font-weight: bold; cursor: pointer; }
+
+        .nav-links { display: flex; gap: 20px; font-size: 16px; align-items: center; }
+        .nav-item { color: #fff; }
+        .nav-item:hover { color: #ff9900; }
+        .premium-btn { padding: 5px 10px; border-radius: 3px; font-weight: bold; background-color: #ff9900; color: #000; text-transform: uppercase; font-size: 12px; }
+
+        .main-container { display: flex; max-width: 1400px; margin: 20px auto; padding: 0 20px; gap: 30px; }
+        
+        .video-section { flex: 1; }
+        
+        .video-player { width: 100%; aspect-ratio: 16/9; background-color: #1a1a1a; margin-bottom: 15px; }
+        .video-player iframe { width: 100%; height: 100%; border: none; }
+
+        .video-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; line-height: 1.4; }
+        
+        .video-stats { display: flex; gap: 20px; color: #aaa; font-size: 14px; padding-bottom: 15px; border-bottom: 1px solid #333; margin-bottom: 15px; }
+        .video-stats span { display: flex; align-items: center; gap: 5px; }
+
+        .video-actions { display: flex; gap: 15px; margin-bottom: 20px; }
+        .action-btn { background-color: #333; border: none; color: #fff; padding: 10px 20px; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .action-btn:hover { background-color: #444; }
+        .action-btn.liked { background-color: #ff9900; color: #000; }
+
+        .author-info { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #333; margin-bottom: 20px; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background-color: #333; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .author-details { flex: 1; }
+        .author-name { font-weight: bold; font-size: 16px; color: #ff9900; }
+        .author-subs { color: #aaa; font-size: 12px; margin-top: 3px; }
+        .subscribe-btn { background-color: #ff3366; border: none; color: #fff; padding: 10px 20px; border-radius: 3px; cursor: pointer; font-weight: bold; }
+        .subscribe-btn:hover { background-color: #ff1a53; }
+
+        .video-description { background-color: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .description-text { color: #ccc; line-height: 1.8; white-space: pre-line; }
+        .video-tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background-color: #333; color: #ff9900; padding: 5px 12px; border-radius: 15px; font-size: 12px; }
+        .tag:hover { background-color: #444; }
+
+        .comments-section { margin-top: 30px; }
+        .comments-header { font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .comment-count { color: #aaa; font-size: 14px; }
+        
+        .comment-input-area { display: flex; gap: 15px; margin-bottom: 30px; }
+        .comment-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #333; display: flex; align-items: center; justify-content: center; }
+        .comment-input { flex: 1; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px; padding: 12px; color: #fff; font-size: 14px; resize: none; }
+        .comment-input:focus { outline: none; border-color: #ff9900; }
+
+        .comment { display: flex; gap: 15px; margin-bottom: 25px; }
+        .comment-avatar-small { width: 40px; height: 40px; border-radius: 50%; background-color: #333; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .comment-content { flex: 1; }
+        .comment-author { font-weight: bold; font-size: 13px; margin-bottom: 5px; }
+        .comment-author span { color: #aaa; font-weight: normal; margin-left: 10px; }
+        .comment-text { color: #ccc; line-height: 1.5; font-size: 14px; }
+        .comment-actions { margin-top: 8px; display: flex; gap: 15px; }
+        .comment-action { background: none; border: none; color: #aaa; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .comment-action:hover { color: #fff; }
+
+        .sidebar { width: 400px; flex-shrink: 0; }
+        .sidebar-title { font-size: 16px; margin-bottom: 15px; color: #aaa; }
+        
+        .recommended-video { display: flex; gap: 10px; margin-bottom: 15px; cursor: pointer; }
+        .recommended-video:hover .rec-title { color: #ff9900; }
+        .rec-thumbnail { width: 160px; height: 90px; background-color: #333; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 4px; overflow: hidden; }
+        .rec-thumbnail-content { font-size: 20px; opacity: 0.5; }
+        .rec-duration { position: absolute; bottom: 3px; right: 3px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 1px 4px; font-size: 11px; }
+        .rec-info { flex: 1; }
+        .rec-title { font-size: 13px; font-weight: bold; line-height: 1.3; margin-bottom: 5px; color: #fff; }
+        .rec-author { color: #aaa; font-size: 11px; margin-bottom: 3px; }
+        .rec-stats { color: #777; font-size: 11px; }
+
+        .ad-box { background-color: #1a1a1a; border: 1px dashed #444; padding: 30px; text-align: center; margin-top: 20px; border-radius: 5px; }
+        .ad-text { color: #ff9900; font-size: 14px; }
+
+        footer { margin-top: 50px; padding: 40px 20px; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+
+        @media (max-width: 1000px) {
+            .main-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .recommended-video { flex-direction: row; }
+        }
+        @media (max-width: 600px) {
+            .search-bar { display: none; }
+            .video-actions { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== 顶部导航 ==================== -->
+<header>
+    <div class="header-left">
+        <a href="index.html" class="logo-container">
+            <span class="logo-text">Libido</span><span class="logo-box">Hub</span>
+        </a>
+    </div>
+    
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="搜寻你被压抑的欲望...">
+        <button class="search-btn">搜索</button>
+    </div>
+
+    <div class="nav-links">
+        <a href="login.html" class="nav-item">登录</a>
+        <a href="register.html" class="nav-item">注册</a>
+        <a href="premium.html" class="premium-btn">升级到超我会员</a>
+    </div>
+</header>
+
+<div class="main-container">
+    
+    <!-- ==================== 主视频区域 ==================== -->
+    <div class="video-section">
+        
+        <!-- 视频播放器 - 点击跳转B站 -->
+        <!-- 如果要换视频，改下面onclick里的链接就行 -->
+        <div class="video-player" onclick="window.open('https://www.bilibili.com/video/BV1cz4y1h7aP/?p=12', '_blank')" style="cursor:pointer; background:#1a1a1a; position:relative;">
+            <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <div style="font-size:80px;color:#ff9900;">▶️</div>
+                <div style="color:#ff9900;margin-top:20px;font-size:18px;font-weight:bold;">点击播放完整疗程</div>
+                <div style="color:#666;margin-top:10px;font-size:14px;">（前往B站 · 是的这是正经学术内容）</div>
+                <div style="color:#444;margin-top:20px;font-size:12px;">张沛超精神分析讲座 · 第12讲：移情</div>
+            </div>
+            <!-- 假的播放器控制栏 -->
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:15px 15px 10px 15px;">
+                <!-- 进度条 -->
+                <div style="width:100%;height:4px;background:#444;border-radius:2px;margin-bottom:10px;">
+                    <div style="width:0%;height:100%;background:#ff9900;border-radius:2px;"></div>
+                </div>
+                <!-- 控制按钮 -->
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div style="display:flex;align-items:center;gap:15px;color:#fff;font-size:14px;">
+                        <span style="cursor:pointer;">▶️</span>
+                        <span style="cursor:pointer;">⏭️</span>
+                        <span style="color:#aaa;font-size:12px;">0:00 / 50:00</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:15px;color:#fff;font-size:14px;">
+                        <span style="cursor:pointer;">🔊</span>
+                        <span style="cursor:pointer;">⚙️</span>
+                        <span style="cursor:pointer;">🖥️</span>
+                        <span style="cursor:pointer;">⛶</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 视频标题 -->
+        <h1 class="video-title">我爱上了我的分析师——这是移情还是真爱？(完整疗程)</h1>
+
+        <!-- 视频统计 -->
+        <div class="video-stats">
+            <span>👁️ 8,904,521次观看</span>
+            <span>📅 1912年上传</span>
+            <span>💕 情人节专区</span>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="video-actions">
+            <button class="action-btn liked">👍 升华114,514</button>
+            <button class="action-btn">👎 压抑 1,919</button>
+            <button class="action-btn">💾 内摄</button>
+            <button class="action-btn">📤 投射</button>
+            <button class="action-btn">🚨 弑父</button>
+        </div>
+
+        <!-- 作者信息 -->
+        <div class="author-info">
+            <div class="author-avatar">🛋️</div>
+            <div class="author-details">
+                <div class="author-name">Transference_Victim ✓</div>
+                <div class="author-subs">234,567 位被分析者已订阅</div>
+            </div>
+            <button class="subscribe-btn">订阅移情</button>
+        </div>
+
+        <!-- 视频简介 -->
+        <div class="video-description">
+            <div class="description-text">当她第一次躺在那张沙发上，她不知道接下来的50分钟会改变一切...
+
+第12次疗程：她开始期待每周三下午两点。
+第25次疗程：她梦见了他。梦的内容被压抑了。
+第38次疗程：她终于说出了那句话。
+第39次疗程：他说这叫"移情"。
+第40次疗程：她问"那又怎样"。
+
+弗洛伊德在1915年写道："移情之爱与正常的爱没有本质区别。"
+那么问题来了——如果移情是爱，爱是不是也是移情？
+你对任何人的爱，有多少是真正看见了对方，又有多少是投射了早年客体？
+
+本视频为张沛超老师精神分析课程第12讲，主题：移情与反移情。
+看完你可能会开始质疑你所有的感情关系。
+这是正常的。这叫做领悟。
+
+⚠️ 警告：观看后可能产生以下副作用：
+- 开始分析自己的每一段关系
+- 对伴侣说"你只是我的移情客体"（不建议）
+- 强烈想要找一个分析师（然后爱上ta）</div>
+            
+            <div class="video-tags">
+                <a href="#" class="tag">#移情</a>
+                <a href="#" class="tag">#反移情</a>
+                <a href="#" class="tag">#治疗关系</a>
+                <a href="#" class="tag">#边界问题</a>
+                <a href="#" class="tag">#50分钟的爱情</a>
+                <a href="#" class="tag">#弗洛伊德说得对</a>
+                <a href="#" class="tag">#张沛超</a>
+                <a href="#" class="tag">#情人节特供</a>
+            </div>
+        </div>
+
+        <!-- 评论区 -->
+        <div class="comments-section">
+            <div class="comments-header">
+                评论 <span class="comment-count">19,198 条</span>
+            </div>
+
+            <div class="comment-input-area">
+                <div class="comment-avatar">🙋</div>
+                <textarea class="comment-input" rows="2" placeholder="分享你的移情经历...（匿名）"></textarea>
+            </div>
+
+            <!-- 评论列表 -->
+            <div class="comment">
+                <div class="comment-avatar-small">😭</div>
+                <div class="comment-content">
+                    <div class="comment-author">Anonymous_Analysand <span>3小时前</span></div>
+                    <div class="comment-text">我哭死，这就是我的真实经历。每周最期待的就是那50分钟，然后他告诉我这是"移情"，我应该"分析它"。分析你妈，我就是爱你。（后来我换了个分析师）（然后我又爱上了新的）（救命）</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 8,964</button>
+                        <button class="comment-action">👎</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">🧠</div>
+                <div class="comment-content">
+                    <div class="comment-author">Dr_Freud_Official ✓ <span>112年前</span></div>
+                    <div class="comment-text">我早就说过了。移情之爱具有正常爱情的一切特征。它只是发生在一个特殊的环境里。你们为什么不听我的。</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 114,514</button>
+                        <button class="comment-action">👎</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">📖</div>
+                <div class="comment-content">
+                    <div class="comment-author">Reading_"On_Transference_Love" <span>1天前</span></div>
+                    <div class="comment-text">建议搭配弗洛伊德《论移情之爱》(1915) 食用。原文说：分析师应该把移情之爱当作真实的，同时也要认识到它是由分析情境诱发的。这个悖论我想了三年还没想通。</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 2,333</button>
+                        <button class="comment-action">👎</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">💔</div>
+                <div class="comment-content">
+                    <div class="comment-author">Heartbroken_But_Analyzed <span>6小时前</span></div>
+                    <div class="comment-text">分析师视角的续集什么时候出？我想知道他们是怎么处理反移情的。难道他们真的可以完全不动心吗？？？</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 1,847</button>
+                        <button class="comment-action">👎</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">🤔</div>
+                <div class="comment-content">
+                    <div class="comment-author">Philosophy_Major_420 <span>2天前</span></div>
+                    <div class="comment-text">所以我现在开始怀疑我对我女朋友的感情了...她是不是只是我妈的替代品？我需要200小时的分析来搞清楚这个问题。</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 967</button>
+                        <button class="comment-action">👎</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">😏</div>
+                <div class="comment-content">
+                    <div class="comment-author">Jung_Did_It_First <span>5小时前</span></div>
+                    <div class="comment-text">笑死，你们讨论移情伦理的时候，荣格已经直接睡了萨宾娜了。理论是理论，实践是实践（手动狗头）</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 6,969</button>
+                        <button class="comment-action">👎 810</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">🛋️</div>
+                <div class="comment-content">
+                    <div class="comment-author">Actual_Therapist_Throwaway <span>8小时前</span></div>
+                    <div class="comment-text">作为一个真正的咨询师，我可以告诉你们：是的，我们也会有反移情。是的，这很难处理。不，我们不会告诉你们。这就是为什么我们也需要督导。每周。付费的。</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 4,521</button>
+                        <button class="comment-action">👎</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== 侧边栏推荐 ==================== -->
+    <div class="sidebar">
+        <div class="sidebar-title">相关推荐</div>
+
+        <a href="sabina.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">💋📝</div>
+                <span class="rec-duration">33:20</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">萨宾娜对我来说是个来访，我的反移情一直压在...</div>
+                <div class="rec-author">Carl_Jung_Real ✓</div>
+                <div class="rec-stats">450万次观看</div>
+            </div>
+        </a>
+
+        <a href="jung-freud-cruise.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">👨‍⚕️❤️‍🔥👴</div>
+                <span class="rec-duration">7年</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">荣格在海上巡航时喜欢弗洛伊德的自我在他的潜意识里</div>
+                <div class="rec-author">SS_George_Washington_1909</div>
+                <div class="rec-stats">600万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">💑➡️🛋️</div>
+                <span class="rec-duration">25:15</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">他不是我父亲，但是...（移情的真相）</div>
+                <div class="rec-author">Attachment_Style</div>
+                <div class="rec-stats">320万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">👨‍👧📝😰</div>
+                <span class="rec-duration">数年</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">父亲深入探索女儿的幻想 - 弗洛伊德分析安娜全记录</div>
+                <div class="rec-author">Vienna_1918</div>
+                <div class="rec-stats">560万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">👩‍⚕️💋🙍‍♀️</div>
+                <span class="rec-duration">数月</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">费伦齐真的亲了他的病人 - 弗洛伊德愤怒来信曝光</div>
+                <div class="rec-author">Budapest_School</div>
+                <div class="rec-stats">230万次观看</div>
+            </div>
+        </a>
+
+        <div class="ad-box">
+            <div class="ad-text">💕 情人节特惠 💕<br>找一个不会爱上的分析师<br>（不保证）</div>
+        </div>
+
+        <a href="404.html" class="recommended-video" style="margin-top: 20px;">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">🧠💔🔄</div>
+                <span class="rec-duration">45:00</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">强迫性重复：为什么你总是爱上同一类人</div>
+                <div class="rec-author">Repetition_Compulsion</div>
+                <div class="rec-stats">780万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">👶➡️👩‍❤️‍👨</div>
+                <span class="rec-duration">38:15</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">你的择偶标准 其实是你的早年客体关系 (扎心)</div>
+                <div class="rec-author">Object_Relations_101</div>
+                <div class="rec-stats">920万次观看</div>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 1900-2026 LibidoHub. 维也纳精神分析协会 & 国际精神分析协会联合认证。</p>
+    <p>本视频内容来自张沛超老师的精神分析讲座，仅供学术交流。如有移情请咨询您的分析师。</p>
+</footer>
+
+</body>
+</html>

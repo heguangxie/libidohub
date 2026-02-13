@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibidoHub - 互联网首选力比多释放中心</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+        a { text-decoration: none; color: inherit; }
+
+        /* 侧边栏样式 */
+        .sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background-color: #1b1b1b; z-index: 1000; transition: left 0.3s ease; overflow-y: auto; border-right: 1px solid #333; }
+        .sidebar.open { left: 0; }
+        .sidebar-header { padding: 20px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .sidebar-title { color: #ff9900; font-size: 18px; font-weight: bold; }
+        .close-btn { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+        .sidebar-section { padding: 15px 20px; border-bottom: 1px solid #333; }
+        .sidebar-section-title { color: #ff9900; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .sidebar-link { display: block; color: #ccc; padding: 8px 0; font-size: 14px; }
+        .sidebar-link:hover { color: #ff9900; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; display: none; }
+        .sidebar-overlay.show { display: block; }
+
+        header { background-color: #1b1b1b; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .menu-btn { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 5px 10px; }
+        .menu-btn:hover { color: #ff9900; }
+        .logo-container { font-size: 28px; font-weight: bold; letter-spacing: -1px; cursor: pointer; }
+        .logo-text { color: #fff; }
+        .logo-box { background-color: #ff9900; color: #000; padding: 2px 8px; border-radius: 4px; margin-left: 2px; }
+
+        .search-bar { flex-grow: 1; display: flex; max-width: 600px; margin: 0 20px; }
+        .search-input { width: 100%; padding: 10px; background-color: #000; border: 1px solid #333; color: #999; font-size: 16px; }
+        .search-btn { background-color: #ff9900; border: none; padding: 0 20px; color: #000; font-weight: bold; cursor: pointer; }
+
+        .nav-links { display: flex; gap: 20px; font-size: 16px; align-items: center; }
+        .nav-item { color: #fff; }
+        .nav-item:hover { color: #ff9900; }
+        .premium-btn { padding: 5px 10px; border-radius: 3px; font-weight: bold; background-color: #ff9900; color: #000; text-transform: uppercase; font-size: 12px; }
+
+        .sub-nav { background-color: #131313; padding: 10px 20px; display: flex; gap: 20px; border-bottom: 1px solid #333; overflow-x: auto; }
+        .sub-nav a { color: #ccc; white-space: nowrap; }
+        .sub-nav a:hover { color: #ff9900; }
+        .sub-nav a.active { color: #ff9900; border-bottom: 2px solid #ff9900; }
+
+        .container { width: 95%; margin: 20px auto; }
+        .section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; margin-top: 30px; }
+        .section-title { font-size: 24px; font-weight: normal; }
+        .section-title .emoji { margin-right: 10px; }
+        .see-all { color: #999; font-size: 14px; }
+        .see-all:hover { color: #ff9900; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        .video-card { cursor: pointer; transition: transform 0.2s; display: block; }
+        .video-card:hover { transform: translateY(-3px); }
+        .video-card:hover .title { color: #ff9900; }
+
+        .thumbnail { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #333; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; overflow: hidden; border: 1px solid #000; }
+        .thumbnail-content { font-size: 28px; opacity: 0.4; text-align: center; padding: 10px; line-height: 1.3; }
+        .duration { position: absolute; bottom: 5px; right: 5px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 1px 4px; font-size: 12px; border: 1px solid #666; }
+        .hd-badge { position: absolute; top: 5px; left: 5px; background-color: #ff9900; color: #000; padding: 0 4px; font-size: 10px; font-weight: bold; border-radius: 2px; }
+        .valentine-badge { position: absolute; top: 5px; left: 5px; background-color: #ff3366; color: #fff; padding: 0 6px; font-size: 10px; font-weight: bold; border-radius: 2px; }
+
+        .video-info { padding-top: 8px; }
+        .title { font-size: 14px; font-weight: bold; margin-bottom: 5px; line-height: 1.3; color: #fff; }
+        .metadata { color: #777; font-size: 12px; display: flex; justify-content: space-between; }
+        .author { color: #777; font-size: 11px; margin-top: 3px; display: block; }
+
+        .ad-banner { width: 100%; height: 90px; background-color: #222; margin: 20px 0; display: flex; align-items: center; justify-content: center; border: 1px dashed #444; color: #ff9900; font-size: 18px; font-weight: bold; }
+        .ad-banner.valentine { background: linear-gradient(90deg, #1a0a0a 0%, #2a0a15 50%, #1a0a0a 100%); border-color: #ff3366; color: #ff6699; }
+
+        .sort-bar { display: flex; gap: 15px; margin-bottom: 20px; padding: 10px 0; border-bottom: 1px solid #333; }
+        .sort-btn { background: none; border: 1px solid #333; color: #999; padding: 5px 12px; font-size: 12px; cursor: pointer; border-radius: 3px; }
+        .sort-btn:hover, .sort-btn.active { border-color: #ff9900; color: #ff9900; }
+
+        footer { margin-top: 50px; padding: 40px 20px; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+        .footer-links a { margin: 0 10px; }
+        .footer-links a:hover { color: #fff; }
+
+        @media (max-width: 1200px) {
+            .video-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .search-bar { display: none; }
+        }
+        @media (max-width: 600px) {
+            .video-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== 侧边栏分类 ==================== -->
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <span class="sidebar-title">分类</span>
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+    </div>
+    
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">🔥 热门专区</div>
+        <a href="freud.html" class="sidebar-link">📚 弗洛伊德专区</a>
+        <a href="valentine.html" class="sidebar-link">💕 情人节特辑</a>
+        <a href="incest.html" class="sidebar-link">⚠️ 乱伦专区 (设置违规)</a>
+        <a href="sm.html" class="sidebar-link">⛓️ SM专区 (比昂/容器)</a>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">📈 发展阶段</div>
+        <a href="oral.html" class="sidebar-link">🍼 口欲期</a>
+        <a href="anal.html" class="sidebar-link">🚽 肛欲期</a>
+        <a href="phallic.html" class="sidebar-link">🍌 性器期</a>
+        <a href="latency.html" class="sidebar-link">📖 潜伏期</a>
+        <a href="genital.html" class="sidebar-link">💑 生殖期</a>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">🎭 概念/Play类型</div>
+        <a href="oedipus.html" class="sidebar-link">👨‍👩‍👦 俄狄浦斯情结</a>
+        <a href="castration.html" class="sidebar-link">✂️ 阉割焦虑</a>
+        <a href="envy.html" class="sidebar-link">😤 阴茎嫉妒</a>
+        <a href="defense.html" class="sidebar-link">🛡️ 防御机制</a>
+        <a href="transference.html" class="sidebar-link">💘 移情/反移情</a>
+        <a href="dreams.html" class="sidebar-link">🌙 梦境解析</a>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">🏫 学派频道</div>
+        <a href="vienna.html" class="sidebar-link">🇦🇹 维也纳经典派</a>
+        <a href="klein.html" class="sidebar-link">🇬🇧 克莱因客体关系</a>
+        <a href="lacan.html" class="sidebar-link">🇫🇷 拉康欲望剧场 (D/s)</a>
+        <a href="winnicott.html" class="sidebar-link">🧸 温尼科特过渡空间</a>
+        <a href="bion.html" class="sidebar-link">📦 比昂容器理论</a>
+        <a href="kohut.html" class="sidebar-link">🪞 科胡特自恋花园</a>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">👤 分析师</div>
+        <a href="https://baike.baidu.com/item/西格蒙德·弗洛伊德" target="_blank" class="sidebar-link">Dr_Freud_Official ✓</a>
+        <a href="https://baike.baidu.com/item/卡尔·荣格" target="_blank" class="sidebar-link">Carl_Jung_Real ✓</a>
+        <a href="https://baike.baidu.com/item/梅兰妮·克莱因" target="_blank" class="sidebar-link">Melanie_K_Official ✓</a>
+        <a href="https://baike.baidu.com/item/雅克·拉康" target="_blank" class="sidebar-link">Jacques_L_Seminars ✓</a>
+        <a href="https://baike.baidu.com/item/安娜·弗洛伊德" target="_blank" class="sidebar-link">Anna_F ✓</a>
+        <a href="https://baike.baidu.com/item/威尔弗雷德·比昂" target="_blank" class="sidebar-link">Wilfred_B_Official ✓</a>
+        <a href="https://baike.baidu.com/item/唐纳德·温尼科特" target="_blank" class="sidebar-link">Winnicott_DW ✓</a>
+        <a href="https://baike.baidu.com/item/海因茨·科胡特" target="_blank" class="sidebar-link">Kohut_Self ✓</a>
+    </div>
+</div>
+
+<!-- ==================== 顶部导航 ==================== -->
+<header>
+    <div class="header-left">
+        <button class="menu-btn" onclick="openSidebar()">☰</button>
+        <a href="index.html" class="logo-container">
+            <span class="logo-text">Libido</span><span class="logo-box">Hub</span>
+        </a>
+    </div>
+    
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="搜寻你被压抑的欲望...">
+        <button class="search-btn">搜索</button>
+    </div>
+
+    <div class="nav-links">
+        <a href="login.html" class="nav-item">登录</a>
+        <a href="register.html" class="nav-item">注册</a>
+        <a href="premium.html" class="premium-btn">升级到超我会员</a>
+    </div>
+</header>
+
+<!-- ==================== 次级导航 ==================== -->
+<nav class="sub-nav">
+    <a href="index.html" class="active">首页</a>
+    <a href="freud.html">弗洛伊德专区</a>
+    <a href="valentine.html">💕 情人节特辑</a>
+    <a href="analysts.html">分析师</a>
+    <a href="schools.html">学派</a>
+    <a href="incest.html">⚠️ 乱伦/设置违规</a>
+    <a href="upload.html">上传案例</a>
+</nav>
+
+<main class="container">
+    
+    <!-- ==================== 情人节横幅广告 ==================== -->
+    <div class="ad-banner valentine">
+        💕 情人节特别企划：移情是不是真爱？分析你的依恋模式！点击领取免费诠释 💕
+    </div>
+
+    <!-- ==================== 排序栏 ==================== -->
+    <div class="sort-bar">
+        <button class="sort-btn active">最新精选</button>
+        <button class="sort-btn">最多观看</button>
+        <button class="sort-btn">最高评分</button>
+        <button class="sort-btn">最长时长</button>
+        <button class="sort-btn">本周热门</button>
+    </div>
+
+    <!-- ==================== 情人节专区 ==================== -->
+    <div class="section-header">
+        <h2 class="section-title"><span class="emoji">💕</span>情人节专区 - 爱与移情</h2>
+        <a href="valentine.html" class="see-all">查看全部 ></a>
+    </div>
+
+    <div class="video-grid">
+        <a href="transference-love.html" class="video-card">
+            <div class="thumbnail">
+                <span class="valentine-badge">💕 情人节</span>
+                <img src="images/transference.png" style="width:100%;height:100%;object-fit:cover;"> 
+                <!--<div class="thumbnail-content">💘🛋️💔</div>-->
+                <span class="duration">50:00</span>
+            </div>
+            <div class="video-info">
+                <div class="title">我爱上了我的分析师——这是移情还是真爱？(完整疗程)</div>
+                <span class="author">Transference_Victim</span>
+                <div class="metadata">
+                    <span>890万次观看</span>
+                    <span>100% 心碎</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="jung-freud-cruise.html" class="video-card">
+            <div class="thumbnail">
+                <span class="valentine-badge">💕 情人节</span>
+                <img src="images/jung&freud.png" style="width:100%;height:100%;object-fit:cover;"> 
+                <span class="duration">7年</span>
+            </div>
+            <div class="video-info">
+                <div class="title">荣格在海上巡航时喜欢弗洛伊德的自我在他的无意识里</div>
+                <span class="author">SS_George_Washington_1909</span>
+                <div class="metadata">
+                    <span>600万次观看</span>
+                    <span>学术巡航</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="sabina.html" class="video-card">
+            <div class="thumbnail">
+                <span class="valentine-badge">💕 情人节</span>
+                <img src="images/couch.jpeg" style="width:100%;height:100%;object-fit:cover;"> 
+               
+                <span class="duration">33:20</span>
+            </div>
+            <div class="video-info">
+                <div class="title">萨宾娜对我来说是个来访，我的反移情一直压在上面...</div>
+                <span class="author">Carl_Jung_Real ✓</span>
+                <div class="metadata">
+                    <span>450万次观看</span>
+                    <span>设置违规</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="valentine-badge">💕 情人节</span>
+                <!-- <img src="images/transference-father.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">💑➡️🛋️</div>
+                <span class="duration">25:15</span>
+            </div>
+            <div class="video-info">
+                <div class="title">他不是我父亲，但是...（移情的真相）</div>
+                <span class="author">Attachment_Style</span>
+                <div class="metadata">
+                    <span>320万次观看</span>
+                    <span>依恋模式</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- ==================== 最热精神分析案例 ==================== -->
+    <div class="section-header">
+        <h2 class="section-title"><span class="emoji">🔥</span>最热精神分析案例</h2>
+        <a href="trending.html" class="see-all">查看全部 ></a>
+    </div>
+
+    <div class="video-grid">
+        
+        <!-- 俄狄浦斯经典 -->
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">HD</span>
+                <!-- <img src="images/oedipus-family.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👨‍👩‍👦💥</div>
+                <span class="duration">45:00</span>
+            </div>
+            <div class="video-info">
+                <div class="title">不仅她丈夫，连她儿子也在卧室里和她——完整俄狄浦斯三角实录</div>
+                <span class="author">Dr_Freud_Official ✓</span>
+                <div class="metadata">
+                    <span>2300万次观看</span>
+                    <span>100% 满意</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- O的故事 -->
+        <a href="story-of-o.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">SM</span>
+                <img src="images/thestoryofO.jpg" style="width:100%;height:100%;object-fit:cover;"> 
+                
+                <span class="duration">一生</span>
+            </div>
+            <div class="video-info">
+                <div class="title">O的故事：容器功能训练全记录，β元素一滴都没有流出</div>
+                <span class="author">Wilfred_B_Official ✓</span>
+                <div class="metadata">
+                    <span>780万次观看</span>
+                    <span>α转化中</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 克莱因母乳 -->
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">4K</span>
+                <!-- <img src="images/klein-breast.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">🍼👩‍👦💧</div>
+                <span class="duration">终生</span>
+            </div>
+            <div class="video-info">
+                <div class="title">成人母乳喂养：妈妈喂养她饥渴的男孩 (克莱因实录)</div>
+                <span class="author">Melanie_K_Official ✓</span>
+                <div class="metadata">
+                    <span>1200万次观看</span>
+                    <span>好乳房认证</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 过渡性客体 -->
+        <a href="transitional-object.html" class="video-card">
+            <div class="thumbnail">
+                <img src="images/过渡性客体.png" style="width:100%;height:100%;object-fit:cover;"> 
+                <span class="duration">12:30</span>
+            </div>
+            <div class="video-info">
+                <div class="title">我每晚使用小玩具入睡：过渡性客体</div>
+                <span class="author">D. W. Winnicott</span>
+                <div class="metadata">
+                    <span>890万次观看</span>
+                    <span>holdingspace</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 小汉斯 -->
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">经典</span>
+                <!-- <img src="images/little-hans.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">🐴👦😱</div>
+                <span class="duration">33:33</span>
+            </div>
+            <div class="video-info">
+                <div class="title">小汉斯害怕马的真正原因 - 父亲大受震撼 (阉割焦虑)</div>
+                <span class="author">Dr_Freud_Official ✓</span>
+                <div class="metadata">
+                    <span>400万次观看</span>
+                    <span>童年创伤</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 荣格抨击弗洛伊德 -->
+        <a href="holding.html" class="video-card">
+            <div class="thumbnail">
+                <img src="images/holding.png" style="width:100%;height:100%;object-fit:cover;"> 
+                
+                <span class="duration">10:00</span>
+            </div>
+            <div class="video-info">
+                <div class="title">sub在我怀里哭怎么办？50分钟完整记录 by 温尼科特</div>
+                <span class="author"> D. W. Winnicott ✓</span>
+                <div class="metadata">
+                    <span>600万次观看</span>
+                    <span>holdingspace</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 阴茎嫉妒 -->
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <!-- <img src="images/penis-envy.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👀🍌😤</div>
+                <span class="duration">08:20</span>
+            </div>
+            <div class="video-info">
+                <div class="title">她非常想要他拥有的那个东西 (极度嫉妒)</div>
+                <span class="author">Anna_F ✓</span>
+                <div class="metadata">
+                    <span>200万次观看</span>
+                    <span>阴茎嫉妒</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 洗手强迫症 -->
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <!-- <img src="images/ocd-washing.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">🧼✋🔁</div>
+                <span class="duration">58:00</span>
+            </div>
+            <div class="video-info">
+                <div class="title">看这个强迫症患者洗手洗了一个小时 (极度满足)</div>
+                <span class="author">RatMan_Fan</span>
+                <div class="metadata">
+                    <span>120万次观看</span>
+                    <span>强迫重复</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- ==================== 弗洛伊德专区预览 ==================== -->
+    <div class="section-header">
+        <h2 class="section-title"><span class="emoji">📚</span>弗洛伊德专区</h2>
+        <a href="freud.html" class="see-all">进入专区 ></a>
+    </div>
+
+    <div class="video-grid">
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">口欲期</span>
+                <!-- <img src="images/oral-fixation.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">🍼👄😋</div>
+                <span class="duration">20:00</span>
+            </div>
+            <div class="video-info">
+                <div class="title">他无法停止吮吸 - 口腔固着的极致体验</div>
+                <span class="author">Dr_Freud_Official ✓</span>
+                <div class="metadata">
+                    <span>340万次观看</span>
+                    <span>口欲满足</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">肛欲期</span>
+                <!-- <img src="images/anal-stage.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">🚽📋✅</div>
+                <span class="duration">35:00</span>
+            </div>
+            <div class="video-info">
+                <div class="title">控制狂的养成：肛欲期训练全记录 (完美主义)</div>
+                <span class="author">Anal_Stage_Expert</span>
+                <div class="metadata">
+                    <span>280万次观看</span>
+                    <span>秩序井然</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="three-essays.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">4K</span>
+                <!-- <img src="images/cigar.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">🚬💭❓</div>
+                <span class="duration">05:45</span>
+            </div>
+            <div class="video-info">
+                <div class="title">这真的不仅仅是一根雪茄 - 深度口腔期分析</div>
+                <span class="author">Viennese_Circle</span>
+                <div class="metadata">
+                    <span>500万次观看</span>
+                    <span>98% 压抑</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">乱伦</span>
+                <!-- <img src="images/freud-anna.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👨‍👧📝😰</div>
+                <span class="duration">数年</span>
+            </div>
+            <div class="video-info">
+                <div class="title">父亲深入探索女儿的幻想 - 弗洛伊德分析安娜全记录</div>
+                <span class="author">Vienna_1918</span>
+                <div class="metadata">
+                    <span>560万次观看</span>
+                    <span>设置违规</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- ==================== 广告位2 ==================== -->
+    <div class="ad-banner">
+        ⚠️ 警告：你附近的单身 [防御机制] 想要被突破！你的阻抗挡不住！
+    </div>
+
+    <!-- ==================== 乱伦/设置违规专区预览 ==================== -->
+    <div class="section-header">
+        <h2 class="section-title"><span class="emoji">⚠️</span>乱伦专区 - 破坏设置的历史</h2>
+        <a href="incest.html" class="see-all">查看全部 ></a>
+    </div>
+
+    <div class="video-grid">
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">禁忌</span>
+                <!-- <img src="images/freud-anna-2.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👨‍👧🛋️💭</div>
+                <span class="duration">数年</span>
+            </div>
+            <div class="video-info">
+                <div class="title">弗洛伊德分析安娜 - 父亲探索女儿手淫幻想完整版</div>
+                <span class="author">Vienna_1918</span>
+                <div class="metadata">
+                    <span>560万次观看</span>
+                    <span>伦理争议</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">丑闻</span>
+                <!-- <img src="images/ferenczi.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👩‍⚕️💋🙍‍♀️</div>
+                <span class="duration">数月</span>
+            </div>
+            <div class="video-info">
+                <div class="title">费伦齐真的亲了他的病人 - 弗洛伊德愤怒来信曝光</div>
+                <span class="author">Budapest_School</span>
+                <div class="metadata">
+                    <span>230万次观看</span>
+                    <span>相互分析</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">母子</span>
+                <!-- <img src="images/klein-sons.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👩‍👦‍👦🔍😢</div>
+                <span class="duration">童年</span>
+            </div>
+            <div class="video-info">
+                <div class="title">克莱因分析自己的儿子们 - 被妈妈分析是什么体验</div>
+                <span class="author">Object_Relations</span>
+                <div class="metadata">
+                    <span>180万次观看</span>
+                    <span>后果严重</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="404.html" class="video-card">
+            <div class="thumbnail">
+                <span class="hd-badge">三角</span>
+                <!-- <img src="images/jung-sabina-freud.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+                <div class="thumbnail-content">👨‍⚕️💔👩‍⚕️👴</div>
+                <span class="duration">3年</span>
+            </div>
+            <div class="video-info">
+                <div class="title">荣格×萨宾娜×弗洛伊德 - 精神分析史上最大丑闻</div>
+                <span class="author">Sabina_S_Archive</span>
+                <div class="metadata">
+                    <span>890万次观看</span>
+                    <span>狗血剧情</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <div class="footer-links">
+        <a href="about.html">关于我们</a> |
+        <a href="join.html">加入分析师团队</a> |
+        <a href="report.html">举报压抑内容</a> |
+        <a href="support.html">技术支持 (不可分析)</a> |
+        <a href="privacy.html">隐私政策 (你没有隐私)</a>
+    </div>
+    <br>
+    <p>© 1900-2026 LibidoHub. 维也纳精神分析协会 & 国际精神分析协会联合认证。</p>
+    <p>所有出镜的病人均已成年（或处于潜伏期）。本网站仅供学术恶搞，如有不适请咨询您的超我。</p>
+    <p style="margin-top: 10px; color: #444;">弗洛伊德说：有时候雪茄只是雪茄。但在这个网站上不是。</p>
+</footer>
+
+<script>
+    function openSidebar() {
+        document.getElementById('sidebar').classList.add('open');
+        document.querySelector('.sidebar-overlay').classList.add('show');
+    }
+    function closeSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+        document.querySelector('.sidebar-overlay').classList.remove('show');
+    }
+</script>
+
+</body>
+</html>

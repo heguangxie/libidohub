@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>荣格在海上巡航时喜欢弗洛伊德的自我在他的潜意识里 - LibidoHub</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #000; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+        a { text-decoration: none; color: inherit; }
+
+        header { background-color: #1b1b1b; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .logo-container { font-size: 28px; font-weight: bold; letter-spacing: -1px; cursor: pointer; }
+        .logo-text { color: #fff; }
+        .logo-box { background-color: #ff9900; color: #000; padding: 2px 8px; border-radius: 4px; margin-left: 2px; }
+
+        .nav-links { display: flex; gap: 20px; font-size: 16px; align-items: center; }
+        .nav-item { color: #fff; }
+        .nav-item:hover { color: #ff9900; }
+        .premium-btn { padding: 5px 10px; border-radius: 3px; font-weight: bold; background-color: #ff9900; color: #000; text-transform: uppercase; font-size: 12px; }
+
+        .main-container { display: flex; max-width: 1400px; margin: 20px auto; padding: 0 20px; gap: 30px; }
+        
+        .content-section { flex: 1; }
+
+        /* 文档阅读器样式 */
+        .document-viewer { 
+            background-color: #f5f0e6; 
+            border-radius: 8px; 
+            padding: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .document-header {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .document-title-area { color: #f5f0e6; }
+        .document-type { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+        .document-main-title { font-size: 18px; font-weight: bold; margin-top: 5px; }
+        .document-controls { display: flex; gap: 10px; }
+        .doc-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .doc-btn:hover { background: rgba(255,255,255,0.3); }
+
+        .document-tabs {
+            background-color: #654321;
+            display: flex;
+            gap: 0;
+        }
+        .doc-tab {
+            padding: 12px 20px;
+            color: #ccc;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-size: 13px;
+        }
+        .doc-tab:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .doc-tab.active { color: #fff; border-bottom-color: #ff9900; background: rgba(255,255,255,0.1); }
+
+        .document-content {
+            padding: 30px 40px;
+            color: #333;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .document-content::-webkit-scrollbar { width: 8px; }
+        .document-content::-webkit-scrollbar-track { background: #e0d5c5; }
+        .document-content::-webkit-scrollbar-thumb { background: #8b4513; border-radius: 4px; }
+
+        .letter {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .letter.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .letter-header {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .letter-meta { font-size: 14px; color: #666; }
+        .letter-date { font-style: italic; }
+        .letter-from, .letter-to { margin: 5px 0; }
+
+        .letter-body { font-size: 16px; }
+        .letter-body p { margin-bottom: 15px; text-indent: 2em; }
+        .letter-signature { margin-top: 30px; font-style: italic; text-align: right; }
+
+        .letter-footnote {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #999;
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .highlight { background-color: #ffe4b5; padding: 2px 4px; }
+        .redacted { background-color: #333; color: #333; cursor: pointer; padding: 0 3px; }
+        .redacted:hover { background-color: #666; }
+        .redacted.revealed { background-color: transparent; color: #c00; }
+
+        /* 视频信息区 */
+        .video-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; line-height: 1.4; }
+        
+        .video-stats { display: flex; gap: 20px; color: #aaa; font-size: 14px; padding-bottom: 15px; border-bottom: 1px solid #333; margin-bottom: 15px; }
+
+        .video-actions { display: flex; gap: 15px; margin-bottom: 20px; }
+        .action-btn { background-color: #333; border: none; color: #fff; padding: 10px 20px; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .action-btn:hover { background-color: #444; }
+        .action-btn.liked { background-color: #ff9900; color: #000; }
+
+        .author-info { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #333; margin-bottom: 20px; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background-color: #333; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .author-details { flex: 1; }
+        .author-name { font-weight: bold; font-size: 16px; color: #ff9900; }
+        .author-subs { color: #aaa; font-size: 12px; margin-top: 3px; }
+        .subscribe-btn { background-color: #ff3366; border: none; color: #fff; padding: 10px 20px; border-radius: 3px; cursor: pointer; font-weight: bold; }
+
+        .video-description { background-color: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .description-text { color: #ccc; line-height: 1.8; white-space: pre-line; }
+        .video-tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background-color: #333; color: #ff9900; padding: 5px 12px; border-radius: 15px; font-size: 12px; }
+
+        /* 评论区 */
+        .comments-section { margin-top: 30px; }
+        .comments-header { font-size: 18px; margin-bottom: 20px; }
+        .comment-count { color: #aaa; font-size: 14px; }
+        
+        .comment { display: flex; gap: 15px; margin-bottom: 25px; }
+        .comment-avatar-small { width: 40px; height: 40px; border-radius: 50%; background-color: #333; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .comment-content { flex: 1; }
+        .comment-author { font-weight: bold; font-size: 13px; margin-bottom: 5px; }
+        .comment-author span { color: #aaa; font-weight: normal; margin-left: 10px; }
+        .comment-text { color: #ccc; line-height: 1.5; font-size: 14px; }
+        .comment-actions { margin-top: 8px; display: flex; gap: 15px; }
+        .comment-action { background: none; border: none; color: #aaa; font-size: 12px; cursor: pointer; }
+
+        /* 侧边栏 */
+        .sidebar { width: 350px; flex-shrink: 0; }
+        .sidebar-title { font-size: 16px; margin-bottom: 15px; color: #aaa; }
+        
+        .recommended-video { display: flex; gap: 10px; margin-bottom: 15px; cursor: pointer; }
+        .recommended-video:hover .rec-title { color: #ff9900; }
+        .rec-thumbnail { width: 140px; height: 80px; background-color: #333; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 4px; }
+        .rec-thumbnail-content { font-size: 18px; opacity: 0.5; }
+        .rec-duration { position: absolute; bottom: 3px; right: 3px; background-color: rgba(0,0,0,0.8); color: #fff; padding: 1px 4px; font-size: 11px; }
+        .rec-info { flex: 1; }
+        .rec-title { font-size: 12px; font-weight: bold; line-height: 1.3; margin-bottom: 5px; color: #fff; }
+        .rec-author { color: #aaa; font-size: 11px; }
+        .rec-stats { color: #777; font-size: 11px; }
+
+        footer { margin-top: 50px; padding: 40px 20px; border-top: 1px solid #333; text-align: center; color: #666; font-size: 12px; }
+
+        @media (max-width: 1000px) {
+            .main-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .document-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="index.html" class="logo-container">
+            <span class="logo-text">Libido</span><span class="logo-box">Hub</span>
+        </a>
+    </div>
+
+    <div class="nav-links">
+        <a href="login.html" class="nav-item">登录</a>
+        <a href="register.html" class="nav-item">注册</a>
+        <a href="premium.html" class="premium-btn">升级到超我会员</a>
+    </div>
+</header>
+
+<div class="main-container">
+    
+    <div class="content-section">
+        
+        <!-- 文档阅读器 -->
+        <div class="document-viewer">
+            <div class="document-header">
+                <div class="document-title-area">
+                    <div class="document-type">📜 历史档案 · 私人通信</div>
+                    <div class="document-main-title">弗洛伊德-荣格通信集 (1906-1913)</div>
+                </div>
+                <div class="document-controls">
+                    <button class="doc-btn">📥 下载PDF</button>
+                    <button class="doc-btn">🖨️ 打印</button>
+                    <button class="doc-btn">🔗 分享</button>
+                </div>
+            </div>
+            
+            <div class="document-tabs">
+                <div class="doc-tab active" onclick="showLetter(0)">1909年3月 · 启程前</div>
+                <div class="doc-tab" onclick="showLetter(1)">1909年8月 · 船上</div>
+                <div class="doc-tab" onclick="showLetter(2)">1909年9月 · 美国</div>
+                <div class="doc-tab" onclick="showLetter(3)">1912年 · 裂痕</div>
+                <div class="doc-tab" onclick="showLetter(4)">1913年 · 决裂</div>
+            </div>
+
+            <div class="document-content">
+                
+                <!-- 信件1: 1909年3月 -->
+                <div class="letter active" id="letter-0">
+                    <div class="letter-header">
+                        <div class="letter-meta">
+                            <div class="letter-date">1909年3月11日 · 苏黎世</div>
+                            <div class="letter-from"><strong>发件人：</strong>卡尔·古斯塔夫·荣格</div>
+                            <div class="letter-to"><strong>收件人：</strong>西格蒙德·弗洛伊德</div>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>亲爱的教授：</p>
+                        <p>我非常期待我们即将到来的美国之行。克拉克大学的邀请是精神分析走向世界的重要一步。我们将一起向那些保守的美国人展示<span class="highlight">无意识的力量</span>。</p>
+                        <p>关于我们之间——请您放心，<span class="highlight">绝对不会发生像弗里斯那样的事情</span>。除了偶尔鬼迷心窍外，我的感情一向是持久可靠的。</p>
+                        <p>我知道您对我寄予厚望，希望我能成为精神分析运动的继承人。我不会让您失望的。</p>
+                        <p class="letter-signature">您忠诚的<br>荣格</p>
+                    </div>
+                    <div class="letter-footnote">
+                        [编者注] 弗里斯是弗洛伊德早年的密友，两人后来决裂。荣格此处的保证后来被证明是徒劳的。
+                    </div>
+                </div>
+
+                <!-- 信件2: 1909年8月 船上 -->
+                <div class="letter" id="letter-1">
+                    <div class="letter-header">
+                        <div class="letter-meta">
+                            <div class="letter-date">1909年8月 · SS乔治·华盛顿号 · 大西洋上</div>
+                            <div class="letter-from"><strong>记录者：</strong>荣格晚年回忆录</div>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>在那艘开往美国的船上，我们每天都聚在一起，<span class="highlight">互相分析对方的梦</span>。那是我们关系最亲密的时刻——或者说，是裂痕开始的时刻。</p>
+                        <p>弗洛伊德做了一个梦——这个梦所包含的问题，我认为公之于众是不合适的。</p>
+                        <p>我尽我最大的能力加以阐释，不过我补充说：如果他能给我提供有关他<span class="redacted" onclick="this.classList.toggle('revealed')">私人生活</span>方面的一些补充性细节，我还可以作出更多的解释。</p>
+                        <p>听了我这句话后，弗洛伊德的反应是古怪地瞧了我一眼——十分怀疑的一眼。</p>
+                        <p>然后，他便说道：<span class="highlight">"这我可不想拿我的权威性来冒险！"</span></p>
+                        <p>这时刻，他便完全失掉其权威性了。</p>
+                        <p>这句话深深地烙进了我的脑海里，随之而来的，<span class="highlight">我们的关系的结束便已可预见了</span>。弗洛伊德已把权威性置于真理之上了。</p>
+                    </div>
+                    <div class="letter-footnote">
+                        [编者注] 这是精神分析史上最著名的转折点之一。两位大师在海上互相分析彼此的梦，却在这个过程中发现了无法调和的分歧。弗洛伊德那个被压抑的梦的内容至今成谜。
+                    </div>
+                </div>
+
+                <!-- 信件3: 1909年9月 美国 -->
+                <div class="letter" id="letter-2">
+                    <div class="letter-header">
+                        <div class="letter-meta">
+                            <div class="letter-date">1909年9月 · 克拉克大学 · 马萨诸塞州</div>
+                            <div class="letter-from"><strong>记录者：</strong>历史档案</div>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>在克拉克大学的演讲中，弗洛伊德首次向美国听众系统介绍了精神分析理论。荣格也做了关于词语联想测验的演讲。</p>
+                        <p>两人都获得了荣誉博士学位。</p>
+                        <p>然而，在这次旅途中，荣格首次对弗洛伊德的<span class="highlight">泛性论</span>产生了怀疑。</p>
+                        <p>荣格建议弗洛伊德："如果您不那么强调性的作用，可能更适合美国听众。"</p>
+                        <p>弗洛伊德把这种建议看作是对科学精神的背叛。</p>
+                        <p>他曾这样说过：<span class="highlight">"亲爱的荣格，请您答应我永远不放弃性欲的理论。这是一切事情中最根本的。您知道，我们得使它成为一种教条，一座不可动摇的堡垒。"</span></p>
+                        <p>"堡垒"和"教条"这两个字眼让我震惊——因为教条，也就是说，一种不准批驳就加以相信的东西，其设立的目的只是为了压制各种怀疑。但这却与科学的判断再也没有关系，而只与个人的冲动有关系。</p>
+                        <p>这就是插进我们友谊心脏里的东西。</p>
+                    </div>
+                    <div class="letter-footnote">
+                        [编者注] 弗洛伊德执着于将力比多定义为性能量；荣格则认为力比多是更广泛的生命能量。这一分歧最终导致两人决裂。
+                    </div>
+                </div>
+
+                <!-- 信件4: 1912年 裂痕 -->
+                <div class="letter" id="letter-3">
+                    <div class="letter-header">
+                        <div class="letter-meta">
+                            <div class="letter-date">1912年12月22日 · 维也纳</div>
+                            <div class="letter-from"><strong>发件人：</strong>西格蒙德·弗洛伊德</div>
+                            <div class="letter-to"><strong>收件人：</strong>卡尔·古斯塔夫·荣格</div>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>亲爱的博士：</p>
+                        <p>（注意：不再是"亲爱的朋友"）</p>
+                        <p>关于你的指控，即声称我滥用精神分析，使我的学生处在一种幼稚的依赖状态，认为我应该对他们的幼稚行为负责——</p>
+                        <p>我必须说，你对我的理论的偏离已经越来越明显。你在《力比多的转变与象征》中的观点，实际上是在否定精神分析的根基。</p>
+                        <p>你淡化了<span class="highlight">性欲</span>和<span class="highlight">潜意识压抑</span>的作用，转而谈论什么"集体无意识"和"原型"。这些概念只会让精神分析沦为神秘主义。</p>
+                    </div>
+                    <div class="letter-footnote">
+                        [编者注] 弗洛伊德私下给琼斯写信称荣格"好像彻底失智，表现得非常疯狂"。父子关系走向破裂。
+                    </div>
+                </div>
+
+                <!-- 信件5: 1913年 决裂 -->
+                <div class="letter" id="letter-4">
+                    <div class="letter-header">
+                        <div class="letter-meta">
+                            <div class="letter-date">1913年 · 慕尼黑精神分析大会</div>
+                            <div class="letter-from"><strong>记录者：</strong>荣格晚年回忆</div>
+                        </div>
+                    </div>
+                    <div class="letter-body">
+                        <p>在慕尼黑大会上，有人谈起古埃及法老阿克那顿的一神教改革，说这背后有一种"仇父情结"。</p>
+                        <p>我反对这个观点。</p>
+                        <p>说到这里，<span class="highlight">弗洛伊德突然晕了过去</span>。</p>
+                        <p>这是他第二次在我面前晕倒。第一次是在布莱梅，当时我们正要启程去美国。</p>
+                        <p>这两次晕倒的共同原因显然是<span class="highlight">弑父的幻觉</span>所造成的。他把我对他理论的挑战，解读为儿子对父亲的背叛和谋杀。</p>
+                        <p>弗洛伊德醒来后，像父亲一样看着我。</p>
+                        <p>我们后来同意停止通信联系。</p>
+                        <p>1914年，我辞去国际精神分析协会主席职务。</p>
+                        <p>与弗洛伊德的决裂使我陷入他所谓的"黑暗年代"，在大约四年时间里，我对自己的梦和幻想进行了深度探索，很多人认为，这种活动使我几近疯狂的边缘。</p>
+                        <p>但正是在这黑暗中，我找到了集体无意识的入口。</p>
+                    </div>
+                    <div class="letter-footnote">
+                        [编者注] 精神分析史上最著名的"父子"决裂就此完成。荣格后来发展出分析心理学，与弗洛伊德的精神分析分道扬镳。两人此后再未见面。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 视频标题 -->
+        <h1 class="video-title">荣格在海上巡航时喜欢弗洛伊德的自我在他的潜意识里</h1>
+
+        <div class="video-stats">
+            <span>👁️ 6,000,000次观看</span>
+            <span>📅 1909年首发</span>
+            <span>💔 学术CP · BE结局</span>
+        </div>
+
+        <div class="video-actions">
+            <button class="action-btn liked">👍 升华 191,314</button>
+            <button class="action-btn">👎 压抑 1,913</button>
+            <button class="action-btn">💾 内摄</button>
+            <button class="action-btn">📤 投射</button>
+            <button class="action-btn">🚨 弑父</button>
+        </div>
+
+        <div class="author-info">
+            <div class="author-avatar">🚢</div>
+            <div class="author-details">
+                <div class="author-name">SS_George_Washington_1909 ✓</div>
+                <div class="author-subs">这艘船见证了精神分析史上最重要的七周</div>
+            </div>
+            <button class="subscribe-btn">订阅移情</button>
+        </div>
+
+        <div class="video-description">
+            <div class="description-text">1909年8月，SS乔治·华盛顿号。
+从不莱梅到纽约的七周航程。
+两个男人，每天互相分析对方的梦。
+
+弗洛伊德53岁，精神分析的创始人，寻找他的继承人。
+荣格34岁，被选中的"王储"，怀揣着自己的野心。
+
+船舱里发生了什么？
+——他们互相解梦
+——弗洛伊德拒绝暴露自己
+——荣格第一次感到失望
+——一段"父子"关系开始瓦解
+
+四年后，他们彻底决裂。
+弗洛伊德失去了最有希望的继承人。
+荣格失去了精神之父，陷入"黑暗年代"。
+精神分析学派一分为二。
+
+这不是爱情故事。这是弑父故事。
+或者说——所有的爱情故事都是弑父故事？
+
+📖 本档案包含两人通信的节选与荣格晚年回忆录内容
+⚠️ 涂黑部分点击可显示
+🔍 弗洛伊德那个被压抑的梦的内容至今成谜</div>
+            
+            <div class="video-tags">
+                <a href="#" class="tag">#弗洛伊德</a>
+                <a href="#" class="tag">#荣格</a>
+                <a href="#" class="tag">#精神分析史</a>
+                <a href="#" class="tag">#学术CP</a>
+                <a href="#" class="tag">#BE结局</a>
+                <a href="#" class="tag">#弑父情结</a>
+                <a href="#" class="tag">#七年之痒</a>
+                <a href="#" class="tag">#1909</a>
+                <a href="#" class="tag">#海上互梦</a>
+            </div>
+        </div>
+
+        <!-- 评论区 -->
+        <div class="comments-section">
+            <div class="comments-header">
+                评论 <span class="comment-count">19,139 条</span>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">💔</div>
+                <div class="comment-content">
+                    <div class="comment-author">Academic_Shipper <span>3小时前</span></div>
+                    <div class="comment-text">我磕到了！！！！他们在船上每天互相分析对方的梦！！！这不就是精神分析版的"我们来互相伤害"吗！！！BE了我哭死</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 8,964</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">🧠</div>
+                <div class="comment-content">
+                    <div class="comment-author">Dr_Freud_Official ✓ <span>112年前</span></div>
+                    <div class="comment-text">我不能拿我的权威性来冒险。</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 53,000</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">😤</div>
+                <div class="comment-content">
+                    <div class="comment-author">Carl_Jung_Real ✓ <span>112年前</span></div>
+                    <div class="comment-text">从那时刻起，他便完全失掉其权威性了。</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 34,000</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">📚</div>
+                <div class="comment-content">
+                    <div class="comment-author">History_of_Psychoanalysis <span>1天前</span></div>
+                    <div class="comment-text">弗洛伊德那个不愿意公开的梦到底是什么内容啊！！！我想了一百年了！！！荣格说"公之于众是不合适的"到底是什么意思！！！</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 6,789</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">🎭</div>
+                <div class="comment-content">
+                    <div class="comment-author">Oedipus_Expert <span>5小时前</span></div>
+                    <div class="comment-text">弗洛伊德两次在荣格面前晕倒，而且都是在讨论"弑父"话题的时候...所以弗洛伊德是把荣格当儿子，同时又害怕荣格"杀死"他？精神分析创始人被自己的理论精准命中了（）</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 4,521</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">🚢</div>
+                <div class="comment-content">
+                    <div class="comment-author">SS_George_Fan <span>2天前</span></div>
+                    <div class="comment-text">互相分析对方的梦，这不就是精神分析的69吗</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 11,451</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar-small">💕</div>
+                <div class="comment-content">
+                    <div class="comment-author">Sabina_S_Archive <span>8小时前</span></div>
+                    <div class="comment-text">他们俩忙着互相分析的时候，我在苏黎世等荣格回来（微笑）</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 8,888</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-title">相关推荐</div>
+
+        <a href="sabina.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">📝💋</div>
+                <span class="rec-duration">33:20</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">萨宾娜对我来说是个来访，我的反移情一直压在...</div>
+                <div class="rec-author">Carl_Jung_Real ✓</div>
+                <div class="rec-stats">450万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">😡💔</div>
+                <span class="rec-duration">10:00</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">荣格猛烈抨击弗洛伊德 (精神父权毁灭现场)</div>
+                <div class="rec-author">Carl_Jung_Real ✓</div>
+                <div class="rec-stats">600万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">👨‍👧📝</div>
+                <span class="rec-duration">数年</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">弗洛伊德分析安娜 - 父亲探索女儿幻想完整版</div>
+                <div class="rec-author">Vienna_1918</div>
+                <div class="rec-stats">560万次观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">👨‍⚕️💔👩‍⚕️👴</div>
+                <span class="rec-duration">3年</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">荣格×萨宾娜×弗洛伊德 三角关系全纪录</div>
+                <div class="rec-author">Sabina_S_Archive</div>
+                <div class="rec-stats">890万次观看</div>
+            </div>
+        </a>
+
+        <a href="transference-love.html" class="recommended-video">
+            <div class="rec-thumbnail">
+                <div class="rec-thumbnail-content">💘🛋️💔</div>
+                <span class="rec-duration">50:00</span>
+            </div>
+            <div class="rec-info">
+                <div class="rec-title">我爱上了我的分析师——这是移情还是真爱？</div>
+                <div class="rec-author">Transference_Victim</div>
+                <div class="rec-stats">890万次观看</div>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>© 1900-2026 LibidoHub. 维也纳精神分析协会 & 苏黎世分析心理学会 联合认证。</p>
+    <p>本档案内容来自公开的历史文献与回忆录。如有弑父倾向请咨询您的分析师。</p>
+</footer>
+
+<script>
+    function showLetter(index) {
+        // 隐藏所有信件
+        document.querySelectorAll('.letter').forEach(l => l.classList.remove('active'));
+        // 显示选中的信件
+        document.getElementById('letter-' + index).classList.add('active');
+        // 更新标签样式
+        document.querySelectorAll('.doc-tab').forEach((t, i) => {
+            t.classList.toggle('active', i === index);
+        });
+    }
+</script>
+
+</body>
+</html>

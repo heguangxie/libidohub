@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萨宾娜对我来说是个来访，我的反移情一直压在上面... - LibidoHub</title>
+    <style>
+        body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; }
+        a { text-decoration: none; color: inherit; }
+        
+        header { background-color: #1b1b1b; padding: 15px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: bold; }
+        .logo span { background: #ff9900; color: #000; padding: 2px 5px; border-radius: 3px; }
+
+        .main-container { display: flex; max-width: 1400px; margin: 20px auto; gap: 20px; padding: 0 15px; }
+        .content-area { flex: 3; }
+        .sidebar { flex: 1; }
+
+        .text-player-wrapper {
+            background-color: #000;
+            border: 1px solid #333;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .text-screen {
+            height: 550px;
+            background-color: #111;
+            padding: 40px;
+            overflow-y: scroll;
+            color: #ccc;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 2;
+            font-size: 17px;
+            border-bottom: 3px solid #ff9900;
+        }
+
+        .text-screen h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ff9900;
+            font-size: 24px;
+        }
+
+        .text-screen h3 {
+            color: #ff9900;
+            margin: 40px 0 20px 0;
+            font-size: 18px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .text-screen .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            background: rgba(255, 153, 0, 0.2);
+            padding: 2px 5px;
+            color: #ff9900;
+        }
+
+        .quote-block {
+            margin: 25px 0;
+            padding: 20px 25px;
+            background: #0a0a0a;
+            border-left: 3px solid #ff9900;
+            font-style: italic;
+        }
+
+        .quote-block .source {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+            font-style: normal;
+        }
+
+        .timeline-item {
+            margin: 25px 0;
+            padding: 20px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .timeline-year {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ff9900;
+            color: #000;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+
+        .sexy-comment {
+            color: #ff6b6b;
+            font-style: italic;
+            font-size: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 5px;
+        }
+
+        .revelation {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #1a0a0a 0%, #0d0d0d 100%);
+            border: 1px solid #ff6b6b;
+        }
+
+        .revelation-header {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .opera-parallel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .opera-side, .reality-side {
+            padding: 20px;
+            background: #0a0a0a;
+        }
+
+        .opera-side {
+            border-left: 3px solid #4ecdc4;
+        }
+
+        .reality-side {
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .side-header {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .opera-side .side-header { color: #4ecdc4; }
+        .reality-side .side-header { color: #ff6b6b; }
+
+        .heartbreak {
+            color: #ff6b6b;
+            text-align: center;
+            font-size: 30px;
+            margin: 30px 0;
+        }
+
+        .letter {
+            background: #f5f0e6;
+            color: #333;
+            padding: 25px;
+            margin: 25px 0;
+            font-family: 'Georgia', serif;
+            border-radius: 3px;
+        }
+
+        .letter-header {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .letter-body {
+            line-height: 1.8;
+        }
+
+        .redacted {
+            background-color: #333;
+            color: #333;
+            padding: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .redacted:hover {
+            background-color: #ff6b6b;
+            color: #fff;
+        }
+
+        /* 进度条 */
+        .progress-bar-container {
+            background: #333;
+            height: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .progress-bar {
+            background: #ff9900;
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* 控制栏 */
+        .player-controls {
+            padding: 10px 15px;
+            background: #1b1b1b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .control-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 20px; margin-right: 15px; }
+        .control-btn:hover { color: #ff9900; }
+
+        .video-title { font-size: 22px; margin: 15px 0 10px 0; color: #fff; line-height: 1.4; }
+        .video-stats { color: #888; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        
+        .action-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .action-btn { background: #333; color: #fff; border: none; padding: 8px 15px; cursor: pointer; font-size: 13px; }
+        .action-btn:hover { background: #444; }
+        .btn-orange { color: #ff9900; }
+
+        .tags { margin: 15px 0; }
+        .tag { background:#222; padding:5px 10px; border-radius:10px; color:#888; font-size:12px; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+        .tag:hover { color: #ff9900; }
+
+        /* 评论区 */
+        .comment-section { margin-top: 30px; }
+        .comment { display: flex; gap: 15px; margin-bottom: 20px; }
+        .avatar { width: 40px; height: 40px; background: #ff9900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; flex-shrink: 0; font-size: 18px; }
+        .comment-body h4 { margin: 0 0 5px 0; color: #ff9900; font-size: 14px; }
+        .comment-body h4 span { color: #555; font-size: 11px; font-weight: normal; }
+        .comment-body p { margin: 0; color: #ccc; font-size: 14px; line-height: 1.5; }
+
+        /* 侧边栏 */
+        .sidebar-item { display: flex; gap: 10px; cursor: pointer; margin-bottom: 15px; text-decoration: none; }
+        .sidebar-thumb { width: 160px; height: 90px; background: #333; display: flex; align-items: center; justify-content: center; color: #555; font-size: 11px; text-align: center; flex-shrink: 0; border-radius: 3px; }
+        .sidebar-info { flex: 1; }
+        .sidebar-title { font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #fff; line-height: 1.3; }
+        .sidebar-meta { font-size: 11px; color: #777; }
+        .sidebar-item:hover .sidebar-title { color: #ff9900; }
+
+        .ad-box { background:#222; padding:20px; text-align:center; border:1px dashed #444; color:#ff9900; margin-top: 15px; border-radius: 5px; }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff9900; }
+
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; }
+            .sidebar { order: 2; }
+            .text-screen { height: 450px; padding: 25px; }
+            .opera-parallel { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Libido<span>Hub</span></a>
+    <div style="margin-left:auto; color:#888;">⚠️ 乱伦/设置违规专区</div>
+</header>
+
+<div class="main-container">
+    <div class="content-area">
+        
+        <div class="text-player-wrapper">
+            <div class="text-screen" id="scrollingText">
+
+                <h2>萨宾娜对我来说是个来访，<br>我的反移情一直压在上面...</h2>
+                <div class="subtitle">精神分析史上最大的伦理丑闻 · 一个关于病人、医生、和他们幻想中的孩子的故事</div>
+
+                <h3>第一幕：病人</h3>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">1904</span>
+                    <p>萨宾娜·斯皮尔赖因，18岁，俄国犹太少女，因"歇斯底里症"被送进苏黎世伯格霍茨利精神病院。</p>
+                    <p>她的主治医生是29岁的卡尔·古斯塔夫·荣格。</p>
+                    <p>荣格使用弗洛伊德的新方法分析她——<span class="highlight">自由联想</span>。</p>
+                </div>
+
+                <p class="sexy-comment">让一个18岁的女孩躺在沙发上，对一个29岁的男人说出她最隐秘的性幻想。What could possibly go wrong?</p>
+
+                <h3>第二幕：童年创伤</h3>
+
+                <div class="quote-block">
+                    "在分析过程中，萨宾娜透露：童年时期，她的父亲会打她的屁股作为惩罚。而她发现，这个过程会给她带来<span class="redacted">性快感</span>。"
+                    <div class="source">——荣格病历记录，1905</div>
+                </div>
+
+                <p>这是教科书式的精神分析素材。早年创伤、性欲觉醒、受虐倾向——弗洛伊德理论的完美印证。</p>
+                
+                <p>荣格非常兴奋。他给弗洛伊德写信，详细描述这个案例。</p>
+                
+                <p>弗洛伊德非常感兴趣。</p>
+
+                <p class="sexy-comment">两个男人热烈讨论一个年轻女性的童年性创伤。这叫"学术交流"。</p>
+
+                <h3>第三幕：移情与反移情</h3>
+
+                <p>治疗持续进行。萨宾娜躺在沙发上，荣格坐在她身后，听她说出一切。</p>
+
+                <p>然后，不可避免地——</p>
+
+                <div class="revelation">
+                    <div class="revelation-header">🔥 她爱上了他</div>
+                    <p>这叫<strong>移情</strong>。病人对分析师产生强烈的情感，这是"正常"的治疗过程。</p>
+                    <p>弗洛伊德说：移情是治疗的核心，必须被分析和处理。</p>
+                </div>
+
+                <p>但接下来发生的事情，并不在弗洛伊德的教科书里——</p>
+
+                <div class="revelation">
+                    <div class="revelation-header">🔥🔥 他也爱上了她</div>
+                    <p>这叫<strong>反移情</strong>。分析师对病人产生强烈的情感。</p>
+                    <p>弗洛伊德说：反移情必须被觉察和控制。</p>
+                    <p>荣格说：<span class="redacted">管他呢</span></p>
+                </div>
+
+                <div class="heartbreak">💔🛋️🔥</div>
+
+                <h3>第四幕：界限的崩塌</h3>
+
+                <p>萨宾娜既是他的<strong>病人</strong>，又是他的<strong>学生</strong>，又是他的<strong>情人</strong>。</p>
+
+                <p>三重关系，每一重都是伦理禁忌。</p>
+
+                <div class="quote-block">
+                    "分析就此结束了。我不再是医生，她也不再是病人。我们变成了别的东西。"
+                    <div class="source">——荣格，多年后的回忆</div>
+                </div>
+
+                <p class="sexy-comment">用精分的话说，荣格把"移情行动化"了。用普通话说，他把病人睡了。</p>
+
+                <h3>第五幕：齐格弗里德</h3>
+
+                <p>事情变得更加离谱。</p>
+
+                <p>萨宾娜的日记记录：她和荣格讨论过——如果他们有一个孩子，要取名叫<span class="highlight">齐格弗里德</span>（Siegfried）。</p>
+
+                <p>等等。这个名字很熟悉。</p>
+
+                <div class="opera-parallel">
+                    <div class="opera-side">
+                        <div class="side-header">🎭 瓦格纳《尼伯龙根的指环》</div>
+                        <p><strong>沃坦</strong>（Wotan）：众神之父</p>
+                        <p>↓</p>
+                        <p><strong>齐格蒙德</strong>（Sigmund）：沃坦之子</p>
+                        <p>+ 齐格琳德（妹妹/情人）</p>
+                        <p>↓</p>
+                        <p><strong>齐格弗里德</strong>（Siegfried）：乱伦所生的英雄</p>
+                    </div>
+                    <div class="reality-side">
+                        <div class="side-header">🔥 精神分析现实</div>
+                        <p><strong>西格蒙德·弗洛伊德</strong>（Sigmund）：精神分析之父</p>
+                        <p>↓</p>
+                        <p><strong>荣格</strong>：弗洛伊德的"精神之子"/继承人</p>
+                        <p>+ 萨宾娜（病人/情人）</p>
+                        <p>↓</p>
+                        <p><strong>齐格弗里德</strong>（Siegfried）：他们幻想中的孩子</p>
+                    </div>
+                </div>
+
+                <p><strong>Sigmund = 西格蒙德 = 弗洛伊德的名字。</strong></p>
+                <p><strong>Siegfried = 齐格弗里德 = 齐格蒙德之子。</strong></p>
+
+                <p class="sexy-comment">荣格想用弗洛伊德的名字命名他和病人乱搞可能生出来的孩子。而且这个名字在神话里是乱伦所生的。俄狄浦斯含量爆表。</p>
+
+                <div class="revelation">
+                    <div class="revelation-header">🎭 更深层的隐喻</div>
+                    <p>在瓦格纳的歌剧里，齐格弗里德长大后做了什么？</p>
+                    <p><strong>他打碎了沃坦的长矛。他不认父亲的权威。</strong></p>
+                    <p>荣格后来做了什么？</p>
+                    <p><strong>他和弗洛伊德决裂，打碎了精神分析的"性欲教条"。</strong></p>
+                    <p>荣格取这个名字的时候，是不是已经在暗示他要弑父了？</p>
+                </div>
+
+                <h3>第六幕：东窗事发</h3>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">1909</span>
+                    <p>萨宾娜的母亲发现了女儿和医生的关系。</p>
+                    <p>她愤怒地写信给弗洛伊德：<strong>你的学生在搞我女儿！</strong></p>
+                </div>
+
+                <div class="letter">
+                    <div class="letter-header">萨宾娜母亲致弗洛伊德 · 1909年</div>
+                    <div class="letter-body">
+                        <p>尊敬的弗洛伊德教授：</p>
+                        <p>我必须向您报告一件令人痛心的事。您的学生荣格医生，在治疗我女儿萨宾娜的过程中，与她建立了不正当的关系...</p>
+                    </div>
+                </div>
+
+                <p>弗洛伊德的反应是什么？</p>
+
+                <p>他选择——<strong>帮荣格打掩护</strong>。</p>
+
+                <div class="quote-block">
+                    弗洛伊德写信给萨宾娜，劝她："你应该原谅他。"
+                    <div class="source">他太需要荣格这个"非犹太继承人"了</div>
+                </div>
+
+                <p class="sexy-comment">
+                    医生睡了病人 ✓<br>
+                    师父帮徒弟遮掩 ✓<br>
+                    受害者被劝原谅加害者 ✓<br>
+                    大家继续做同事 ✓<br>
+                    <br>
+                    精神分析早期的伦理观就是：<strong>没有伦理观</strong>
+                </p>
+
+                <h3>第七幕：结局</h3>
+
+                <p>同年，荣格和弗洛伊德一起坐船去美国。他们在海上互相分析对方的梦。</p>
+                <p>四年后，他们决裂。</p>
+                <p>萨宾娜呢？</p>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">后来</span>
+                    <p>萨宾娜没有被毁掉。她自己也成为了精神分析师。</p>
+                    <p>她提出了<span class="highlight">"死亡驱力"</span>的概念雏形——后来被弗洛伊德发展成为精神分析的核心概念之一。</p>
+                    <p>受害者成为了理论家。</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">1942</span>
+                    <p>萨宾娜回到苏联。</p>
+                    <p>她和她的两个女儿被纳粹杀害。</p>
+                </div>
+
+                <h3>尾声：阿尼玛</h3>
+
+                <p>晚年的荣格，用石雕来打发时光。</p>
+                <p>他雕刻了一组名叫<span class="highlight">"阿尼玛"</span>的群像——阿尼玛是他发明的概念，指男人心中的女性原型。</p>
+
+                <div class="quote-block">
+                    其中有一只弯腰的熊，用鼻子推动一颗圆球。
+                    上面的铭文是："俄罗斯让球不停转动。"
+                    <div class="source">——这是荣格献给萨宾娜的悲伤遗言</div>
+                </div>
+
+                <p>即便在此时，荣格仍旧无法公开提起她的名字。</p>
+
+                <p>萨宾娜是他的阿尼玛。</p>
+                <p>他的病人。他的学生。他的情人。他的受害者。他理论的来源之一。</p>
+                <p>一个他永远无法正视的名字。</p>
+
+                <div class="heartbreak">🌹</div>
+
+                <p style="text-align:center; margin-top:50px; color:#666;">
+                    [END]
+                    <br><br>
+                    <span style="color:#ff9900;">精神分析师们用自己的人生完美演绎了精神分析理论。</span>
+                    <br><br>
+                    <span style="font-size:12px; color:#444;">参考：John Kerr《危险方法》、萨宾娜日记、荣格-弗洛伊德通信集</span>
+                </p>
+
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="readingProgress"></div>
+            </div>
+
+            <div class="player-controls">
+                <div>
+                    <button class="control-btn" title="Play">▶</button>
+                    <button class="control-btn" title="Volume">🔊</button>
+                    <span style="color:#888; font-size:12px;">苏黎世 1904-1909 / 俄罗斯 1942</span>
+                </div>
+                <div>
+                    <button class="control-btn" title="Full Screen">⛶</button>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="video-title">萨宾娜对我来说是个来访，我的反移情一直压在上面直到那个病人带来了弗洛伊德的来信...</h1>
+        
+        <div class="video-stats">
+            <span>450万次观看 · 乱伦/设置违规专区</span>
+            
+            <div class="action-buttons">
+                <button class="action-btn btn-orange">💔 反移情 114K</button>
+                <button class="action-btn">😡 举报违规</button>
+                <button class="action-btn">↪ 分享</button>
+                <button class="action-btn">💾 收藏到案例库</button>
+            </div>
+        </div>
+
+        <div class="tags">
+            <span class="tag">#萨宾娜</span>
+            <span class="tag">#荣格</span>
+            <span class="tag">#弗洛伊德</span>
+            <span class="tag">#反移情</span>
+            <span class="tag">#设置违规</span>
+            <span class="tag">#齐格弗里德</span>
+            <span class="tag">#瓦格纳</span>
+            <span class="tag">#俄狄浦斯</span>
+            <span class="tag">#阿尼玛</span>
+            <span class="tag">#精神分析史</span>
+            <span class="tag">#伦理丑闻</span>
+        </div>
+
+        <div class="comment-section">
+            <h3 style="margin-bottom:20px;">评论 (19,421)</h3>
+            
+            <div class="comment">
+                <div class="avatar">😡</div>
+                <div class="comment-body">
+                    <h4>Ethics_Committee <span>刚刚</span></h4>
+                    <p>这就是为什么现在心理咨询有那么严格的伦理规范——因为早期那帮人真的太离谱了</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">🎭</div>
+                <div class="comment-body">
+                    <h4>Wagner_Fan <span>3小时前</span></h4>
+                    <p>等等我也看过指环！！！Sigmund-Siegfried这个对应我之前怎么没想到！！！荣格选这个名字是不是已经在暗示他要弑父了！！！</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">📖</div>
+                <div class="comment-body">
+                    <h4>Sabina_Scholar <span>5小时前</span></h4>
+                    <p>萨宾娜后来提出的死亡驱力概念对精神分析影响深远，但她的贡献长期被忽视。直到她的日记被发现，我们才知道这段历史。</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">🔥</div>
+                <div class="comment-body">
+                    <h4>Freudian_Slip <span>1天前</span></h4>
+                    <p>"分析她童年被打屁股的性快感然后把她睡了"这个流程真的很精神分析（贬义）</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">💔</div>
+                <div class="comment-body">
+                    <h4>Jung_Apologist <span>2天前</span></h4>
+                    <p>我想为荣格说几句... 算了我说不出口</p>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="avatar">🌹</div>
+                <div class="comment-body">
+                    <h4>Anima_Archive <span>1周前</span></h4>
+                    <p>"俄罗斯让球不停转动"——他一辈子都没能说出她的名字，但他把她刻在了石头上。这是忏悔还是占有？</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h4 style="margin-bottom:15px; color:#888;">⚠️ 乱伦专区推荐</h4>
+        
+        <a href="jung-freud-cruise.html" class="sidebar-item">
+            <div class="sidebar-thumb">🚢❤️‍🔥<br>CRUISE</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">荣格在海上巡航时喜欢弗洛伊德的自我在他的潜意识里</div>
+                <div class="sidebar-meta">SS_1909 · 600万观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="sidebar-item">
+            <div class="sidebar-thumb">👨‍👧📝<br>ANNA</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">弗洛伊德分析安娜 - 父亲探索女儿幻想完整版</div>
+                <div class="sidebar-meta">Vienna_1918 · 560万观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="sidebar-item">
+            <div class="sidebar-thumb">💋😰<br>KISS</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">费伦齐真的亲了他的病人 - 弗洛伊德愤怒来信曝光</div>
+                <div class="sidebar-meta">Budapest · 230万观看</div>
+            </div>
+        </a>
+
+        <a href="404.html" class="sidebar-item">
+            <div class="sidebar-thumb">👩‍👦‍👦🔍<br>SONS</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">克莱因分析自己的儿子们 - 被妈妈分析是什么体验</div>
+                <div class="sidebar-meta">Object_Relations · 180万观看</div>
+            </div>
+        </a>
+
+        <a href="transference-love.html" class="sidebar-item">
+            <div class="sidebar-thumb">💘🛋️<br>LOVE?</div>
+            <div class="sidebar-info">
+                <div class="sidebar-title">我爱上了我的分析师——这是移情还是真爱？</div>
+                <div class="sidebar-meta">Transference_Victim · 890万观看</div>
+            </div>
+        </a>
+
+        <div class="ad-box">
+            <b>⚠️ 警告</b><br>
+            <small>你附近的单身[反移情]想要见你</small><br>
+            <button style="background:#ff9900; border:none; padding:8px 15px; margin-top:10px; cursor:pointer; font-weight:bold;">🔥 突破边界</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const textScreen = document.getElementById('scrollingText');
+    const progressBar = document.getElementById('readingProgress');
+
+    textScreen.addEventListener('scroll', () => {
+        const scrollTop = textScreen.scrollTop;
+        const scrollHeight = textScreen.scrollHeight - textScreen.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = scrolled + "%";
+    });
+</script>
+
+</body>
+</html>

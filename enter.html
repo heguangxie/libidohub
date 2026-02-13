@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问验证 | LibidoHub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
+            z-index: -1;
+        }
+
+        .verification-box {
+            background: #111;
+            border: 1px solid #333;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .warning-header {
+            background: #ff9900;
+            color: #000;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            background: #ff9900;
+            color: #000;
+            padding: 2px 10px;
+            border-radius: 5px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .warning-text {
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .warning-text strong {
+            color: #ff9900;
+        }
+
+        /* 确认清单 */
+        .checklist {
+            text-align: left;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 25px 30px;
+            margin: 25px 0;
+        }
+
+        .checklist-title {
+            color: #ff9900;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff9900;
+            border-radius: 3px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff9900;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .term {
+            color: #ff9900;
+            font-style: italic;
+        }
+
+        /* 按钮 */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-enter {
+            background: #ff9900;
+            color: #000;
+        }
+
+        .btn-enter:hover {
+            background: #ffaa22;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.4);
+        }
+
+        .btn-leave {
+            background: #333;
+            color: #888;
+        }
+
+        .btn-leave:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        /* 底部小字 */
+        .disclaimer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            color: #444;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .disclaimer a {
+            color: #666;
+            text-decoration: underline;
+        }
+
+        /* 浮动的弗洛伊德 */
+        .freud-watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 60px;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        @media (max-width: 500px) {
+            .content { padding: 30px 20px; }
+            .logo { font-size: 36px; }
+            .buttons { flex-direction: column; }
+            .btn { width: 100%; }
+            .checklist { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay"></div>
+<div class="freud-watermark">🛋️</div>
+
+<div class="verification-box">
+    
+    <div class="warning-header">
+        ⚠️ 访问前请确认您的分析资质 ⚠️
+    </div>
+
+    <div class="content">
+        
+        <div class="logo">Libido<span>Hub</span></div>
+        <div class="tagline">"Where Id was, there Ego shall be"</div>
+
+        <p class="warning-text">
+            本站内容涉及<strong>原始欲望</strong>、<strong>婴儿性欲</strong>、<strong>死亡驱力</strong>及其他<strong>未经升华的本我材料</strong>。
+            <br><br>
+            为确保您的心理结构完整性，请确认以下事项：
+        </p>
+
+        <div class="checklist">
+            <div class="checklist-title">入站资质核验</div>
+            
+            <div class="checklist-item">
+                <div class="checkbox">✓</div>
+                <div>我已完成至少 <strong>300小时</strong> 个人分析，或正处于持续性分析关系中</div>
+            </div>
+            
+            <div class="checklist-item">
+                <div class="checkbox">✓</div>
+                <div>我具备成熟的 <span class="term">象征化能力 (Symbolization)</span>，不会将本站内容作具象化或行动化理解</div>
+            </div>
+            
+            <div class="checklist-item">
+                <div class="checkbox">✓</div>
+                <div>我的 <span class="term">超我 (Superego)</span> 已充分发育，能够承受本我材料的暴露而不产生过度焦虑</div>
+            </div>
+            
+            <div class="checklist-item">
+                <div class="checkbox">✓</div>
+                <div>我承诺不会以 <span class="term">否认 (Denial)</span>、<span class="term">投射 (Projection)</span> 或 <span class="term">反向形成 (Reaction Formation)</span> 作为主要防御机制来应对本站内容</div>
+            </div>
+
+            <div class="checklist-item">
+                <div class="checkbox">✓</div>
+                <div>我理解任何产生的 <span class="term">移情 (Transference)</span> 反应应在督导下处理，LibidoHub 不承担相关责任</div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="index.html" class="btn btn-enter">我已被充分分析，进入</a>
+            <a href="https://www.google.com" class="btn btn-leave">我的自我还太脆弱</a>
+        </div>
+
+        <div class="disclaimer">
+            点击"进入"即表示您同意本站 <a href="404.html">分析契约</a> 与 <a href="404.html">潜意识隐私政策</a>。
+            <br>
+            如您在浏览过程中产生 <span class="term">阻抗 (Resistance)</span>，这本身就是有价值的分析材料。
+            <br><br>
+            本站已通过 <strong>维也纳精神分析协会</strong> 认证 (1900-2026)
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
